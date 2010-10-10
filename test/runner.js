@@ -100,14 +100,12 @@ var suites = {
       global.builder.testDirectory = "level2/events";
     }
   },
-  /*
-    Ignoring for now..
   "level2/html" : { cases: require("./level2/html").tests, setUp : function() {
       global.builder.contentType   = "text/html";
       global.builder.type          = "html";
       global.builder.testDirectory = "level2/html";
     }
-  },*/
+  },
  "level3/core" : { cases: require("./level3/core").tests, setUp : function() {
       global.builder.contentType   = "text/xml";
       global.builder.type          = "xml";
