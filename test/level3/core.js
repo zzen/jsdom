@@ -36,144 +36,6 @@ var getImplementation = function() {
 exports.tests = {
   /**
    *
-   Call getSchemaTypeInfo on title attribute for the first acronym element.
-
-   * @author Curt Arnold
-   * @see http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core#Attr-schemaTypeInfo
-   * @see http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core#TypeInfo-typeName
-   * @see http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core#TypeInfo-typeNamespace
-   */
-  attrgetschematypeinfo01: function (test) {
-    var doc = hc_staff.hc_staff();
-    var typeInfo = doc.getElementsByTagName("acronym").item(0).getAttributeNode("title").schemaTypeInfo;
-    test.notEqual(typeInfo, undefined, 'schemaTypeInfo is not yet implemented!');
-    test.notEqual(typeInfo, null, 'typeInfoNotNull');
-    test.equal(typeInfo.typeName, "CDATA", 'nameIsCDATA');
-    test.equal(typeInfo.typeNamespace, "http://www.w3.org/TR/REC-xml", 'nsIsXML');
-    test.done()
-  },
-
-  /**
-   *
-   Call getSchemaTypeInfo on id attribute for the third acronym element.
-
-   * @author Curt Arnold
-   * @see http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core#Attr-schemaTypeInfo
-   * @see http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core#TypeInfo-typeName
-   * @see http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core#TypeInfo-typeNamespace
-   */
-  attrgetschematypeinfo02: function (test) {
-    var doc = hc_staff.hc_staff();
-    var typeInfo = doc.getElementsByTagName("acronym").item(3).getAttributeNode("id").schemaTypeInfo;
-    test.notEqual(typeInfo, undefined, 'schemaTypeInfo is not yet implemented!');
-    test.notEqual(typeInfo, null, 'typeInfoNotNull');
-    test.equal(typeInfo.typeName, "ID", 'nameIsID');
-    test.equal(typeInfo.typeNamespace, "http://www.w3.org/TR/REC-xml", 'nsIsXML');
-    test.done()
-  },
-
-  /**
-   *
-   Call getSchemaTypeInfo on class attribute for the third acronym element.
-
-   * @author Curt Arnold
-   * @see http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core#Attr-schemaTypeInfo
-   * @see http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core#TypeInfo-typeName
-   * @see http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core#TypeInfo-typeNamespace
-   */
-  attrgetschematypeinfo05: function (test) {
-    var doc = hc_staff.hc_staff();
-    var typeInfo = doc.getElementsByTagName("acronym").item(2).getAttributeNode("class").schemaTypeInfo;
-    test.notEqual(typeInfo, undefined, 'schemaTypeInfo is not yet implemented!');
-    test.notEqual(typeInfo, null, 'typeInfoNotNull');
-    test.equal(typeInfo.typeName, "classType", 'nameIsClassType');
-    test.equal(typeInfo.typeNamespace, "http://www.w3.org/1999/xhtml", 'nsIsXHTML');
-    test.done()
-  },
-
-  /**
-   *
-   Attr.schemaTypeInfo should return null if not validating or schema validating.
-
-   * @author Curt Arnold
-   * @see http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core#Attr-schemaTypeInfo
-   * @see http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core#TypeInfo-typeName
-   * @see http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core#TypeInfo-typeNamespace
-   */
-  attrgetschematypeinfo06: function (test) {
-    var doc = hc_nodtdstaff.hc_nodtdstaff();
-    var typeInfo = doc.getElementsByTagName("acronym").item(0).getAttributeNode("title").schemaTypeInfo;
-    test.notEqual(typeInfo, undefined, 'schemaTypeInfo is not yet implemented!');
-    test.notEqual(typeInfo, null, 'typeInfoNotNull');
-    test.equal(typeInfo.typeName, null, 'typeName');
-    test.equal(typeInfo.typeNamespace, null, 'typeNS');
-    test.done()
-  },
-
-  /**
-   *
-   The getSchemaTypeInfo method retrieves the type information associated with this attribute.
-
-   Load a valid document with an XML Schema.
-
-   Invoke getSchemaTypeInfo method on an attribute having [type definition] property.  Expose {name} and {target namespace}
-   properties of the [type definition] property.  Verity that the typeName and typeNamespace of the title attribute's
-   schemaTypeInfo are correct. getSchemaTypeInfo on the 'id' attribute of the fourth 'acronym' element
-
-   * @author IBM
-   * @author Jenny Hsu
-   * @see http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core#Attr-schemaTypeInfo
-   */
-  attrgetschematypeinfo07: function (test) {
-    var doc = hc_staff.hc_staff();
-    var typeInfo = doc.getElementsByTagName("acronym").item(3).getAttributeNode("id").schemaTypeInfo;
-    test.notEqual(typeInfo, undefined, 'schemaTypeInfo is not yet implemented!');
-    test.notEqual(typeInfo, null, 'typeInfoNotNull');
-    test.equal(typeInfo.typeName, "ID", 'attrgetschematypeinfo07_typeName');
-    test.equal(typeInfo.typeNamespace, "http://www.w3.org/2001/XMLSchema", 'attrgetschematypeinfo07_typeNamespace');
-    test.done()
-  },
-
-  /**
-   *
-   The getSchemaTypeInfo method retrieves the type information associated with this attribute.
-
-   Load a valid document with an XML Schema.
-   Invoke getSchemaTypeInfo method on an attribute having [type definition] property.  Expose {name} and {target namespace}
-   properties of the [type definition] property.  Verity that the typeName and typeNamespace of the 'title' attribute's (of first 'acronym' element)
-   schemaTypeInfo are correct.
-
-   * @author IBM
-   * @author Jenny Hsu
-   * @see http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core#Attr-schemaTypeInfo
-   */
-  attrgetschematypeinfo08: function (test) {
-    var doc = hc_staff.hc_staff();
-    var typeInfo = doc.getElementsByTagName("acronym").item(0).getAttributeNode("title").schemaTypeInfo;
-    test.notEqual(typeInfo, undefined, 'schemaTypeInfo is not yet implemented!');
-    test.equal(typeInfo.typeName, "string", 'attrgetschematypeinfo08_typeName');
-    test.equal(typeInfo.typeNamespace, "http://www.w3.org/2001/XMLSchema", 'attrgetschematypeinfo08_typeNamespace');
-    test.done()
-  },
-
-  /**
-   *
-   Retrieve the third acronyms element's class attribute, whose type is not ID.
-   Invoke isID on the class attribute, this should return false.
-
-   * @author IBM
-   * @author Neil Delima
-   * @see http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core#Attr-isId
-   */
-  attrisid01: function (test) {
-    var doc = hc_staff.hc_staff();
-    var attr = doc.getElementsByTagName("acronym").item(2).getAttributeNode("class");
-    test.equal(attr.isId, false, 'AttrIsIDFalse01');
-    test.done()
-  },
-
-  /**
-   *
    Invoke setIdAttribute on the third acronym element's new attribute and set
    isID=true.  Verify by calling isID on the new attribute and check if the
    value returned is true.
@@ -28813,5 +28675,137 @@ exports.tests = {
 
     }
     test.done()
+  },
+  /**
+   *
+   Call getSchemaTypeInfo on title attribute for the first acronym element.
+
+   * @author Curt Arnold
+   * @see http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core#Attr-schemaTypeInfo
+   * @see http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core#TypeInfo-typeName
+   * @see http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core#TypeInfo-typeNamespace
+   */
+  attrgetschematypeinfo01: function (test) {
+    var doc = hc_staff.hc_staff();
+    var typeInfo = doc.getElementsByTagName("acronym").item(0).getAttributeNode("title").schemaTypeInfo;
+    test.notEqual(typeInfo, null, 'typeInfoNotNull');
+    test.equal(typeInfo.typeName, "CDATA", 'nameIsCDATA');
+    test.equal(typeInfo.typeNamespace, "http://www.w3.org/TR/REC-xml", 'nsIsXML');
+    test.done()
+  },
+
+  /**
+   *
+   Call getSchemaTypeInfo on id attribute for the third acronym element.
+
+   * @author Curt Arnold
+   * @see http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core#Attr-schemaTypeInfo
+   * @see http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core#TypeInfo-typeName
+   * @see http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core#TypeInfo-typeNamespace
+   */
+  attrgetschematypeinfo02: function (test) {
+    var doc = hc_staff.hc_staff();
+    var typeInfo = doc.getElementsByTagName("acronym").item(3).getAttributeNode("id").schemaTypeInfo;
+    test.notEqual(typeInfo, null, 'typeInfoNotNull');
+    test.equal(typeInfo.typeName, "ID", 'nameIsID');
+    test.equal(typeInfo.typeNamespace, "http://www.w3.org/TR/REC-xml", 'nsIsXML');
+    test.done()
+  },
+
+  /**
+   *
+   Call getSchemaTypeInfo on class attribute for the third acronym element.
+
+   * @author Curt Arnold
+   * @see http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core#Attr-schemaTypeInfo
+   * @see http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core#TypeInfo-typeName
+   * @see http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core#TypeInfo-typeNamespace
+   */
+  attrgetschematypeinfo05: function (test) {
+    var doc = hc_staff.hc_staff();
+    var typeInfo = doc.getElementsByTagName("acronym").item(2).getAttributeNode("class").schemaTypeInfo;
+    test.notEqual(typeInfo, null, 'typeInfoNotNull');
+    test.equal(typeInfo.typeName, "classType", 'nameIsClassType');
+    test.equal(typeInfo.typeNamespace, "http://www.w3.org/1999/xhtml", 'nsIsXHTML');
+    test.done()
+  },
+
+  /**
+   *
+   Attr.schemaTypeInfo should return null if not validating or schema validating.
+
+   * @author Curt Arnold
+   * @see http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core#Attr-schemaTypeInfo
+   * @see http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core#TypeInfo-typeName
+   * @see http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core#TypeInfo-typeNamespace
+   */
+  attrgetschematypeinfo06: function (test) {
+    var doc = hc_nodtdstaff.hc_nodtdstaff();
+    var typeInfo = doc.getElementsByTagName("acronym").item(0).getAttributeNode("title").schemaTypeInfo;
+    test.notEqual(typeInfo, null, 'typeInfoNotNull');
+    test.equal(typeInfo.typeName, null, 'typeName');
+    test.equal(typeInfo.typeNamespace, null, 'typeNS');
+    test.done()
+  },
+
+  /**
+   *
+   The getSchemaTypeInfo method retrieves the type information associated with this attribute.
+
+   Load a valid document with an XML Schema.
+
+   Invoke getSchemaTypeInfo method on an attribute having [type definition] property.  Expose {name} and {target namespace}
+   properties of the [type definition] property.  Verity that the typeName and typeNamespace of the title attribute's
+   schemaTypeInfo are correct. getSchemaTypeInfo on the 'id' attribute of the fourth 'acronym' element
+
+   * @author IBM
+   * @author Jenny Hsu
+   * @see http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core#Attr-schemaTypeInfo
+   */
+  attrgetschematypeinfo07: function (test) {
+    var doc = hc_staff.hc_staff();
+    var typeInfo = doc.getElementsByTagName("acronym").item(3).getAttributeNode("id").schemaTypeInfo;
+    test.notEqual(typeInfo, null, 'typeInfoNotNull');
+    test.equal(typeInfo.typeName, "ID", 'attrgetschematypeinfo07_typeName');
+    test.equal(typeInfo.typeNamespace, "http://www.w3.org/2001/XMLSchema", 'attrgetschematypeinfo07_typeNamespace');
+    test.done()
+  },
+
+  /**
+   *
+   The getSchemaTypeInfo method retrieves the type information associated with this attribute.
+
+   Load a valid document with an XML Schema.
+   Invoke getSchemaTypeInfo method on an attribute having [type definition] property.  Expose {name} and {target namespace}
+   properties of the [type definition] property.  Verity that the typeName and typeNamespace of the 'title' attribute's (of first 'acronym' element)
+   schemaTypeInfo are correct.
+
+   * @author IBM
+   * @author Jenny Hsu
+   * @see http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core#Attr-schemaTypeInfo
+   */
+  attrgetschematypeinfo08: function (test) {
+    var doc = hc_staff.hc_staff();
+    var typeInfo = doc.getElementsByTagName("acronym").item(0).getAttributeNode("title").schemaTypeInfo;
+    test.equal(typeInfo.typeName, "string", 'attrgetschematypeinfo08_typeName');
+    test.equal(typeInfo.typeNamespace, "http://www.w3.org/2001/XMLSchema", 'attrgetschematypeinfo08_typeNamespace');
+    test.done()
+  },
+
+  /**
+   *
+   Retrieve the third acronyms element's class attribute, whose type is not ID.
+   Invoke isID on the class attribute, this should return false.
+
+   * @author IBM
+   * @author Neil Delima
+   * @see http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core#Attr-isId
+   */
+  attrisid01: function (test) {
+    var doc = hc_staff.hc_staff();
+    var attr = doc.getElementsByTagName("acronym").item(2).getAttributeNode("class");
+    test.equal(attr.isId, false, 'AttrIsIDFalse01');
+    test.done()
   }
+
 }

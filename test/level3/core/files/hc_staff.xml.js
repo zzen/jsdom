@@ -41,8 +41,25 @@ exports.hc_staff = function() {
 
   doc.appendChild(doc.createComment(" This is comment number 1."));
 
+
   var html      = doc.createElementNS("http://www.w3.org/2000/xmlns/","html");
-  var html      = doc.appendChild(html);
+
+/*
+
+Pending schemaInfo implementation
+  html.setAttributeNS(
+    'http://www.w3.org/1999/xhtml',
+    'xmlns:xsi',
+    'http://www.w3.org/2001/XMLSchema-instance'
+  );
+
+  html.setAttributeNS(
+    'http://www.w3.org/2001/XMLSchema-instance',
+    'xsi:schemaLocation',
+    'http://www.w3.org/1999/xhtml hc_staff.xsd'
+  );
+*/
+  doc.appendChild(html);
 
   var head      = doc.createElementNS("http://www.w3.org/2000/xmlns/","head");
   var head      = html.appendChild(head);
