@@ -74,26 +74,6 @@ exports.tests = {
 
   /**
    *
-   Call getSchemaTypeInfo on title attribute for the first acronym element.
-
-   * @author Curt Arnold
-   * @see http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core#Attr-schemaTypeInfo
-   * @see http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core#TypeInfo-typeName
-   * @see http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core#TypeInfo-typeNamespace
-   */
-  // NOTE: this appears to be testing the same schemaTypeInfo as attrgetschematypeinfo01, but for different values... can both tests be valid?
-  attrgetschematypeinfo03: function (test) {
-    var doc = hc_staff.hc_staff();
-    var typeInfo = doc.getElementsByTagName("acronym").item(0).getAttributeNode("title").schemaTypeInfo;
-    test.notEqual(typeInfo, undefined, 'schemaTypeInfo is not yet implemented!');
-    test.notEqual(typeInfo, null, 'typeInfoNotNull');
-    test.equal(typeInfo.typeName, "string", 'nameIsString');
-    test.equal(typeInfo.typeNamespace, "http://www.w3.org/2001/XMLSchema", 'nsIsXML');
-    test.done()
-  },
-
-  /**
-   *
    Call getSchemaTypeInfo on id attribute for the third acronym element.
 
    * @author Curt Arnold
