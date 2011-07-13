@@ -1,7 +1,11 @@
 var sys = require("sys"),
-    dom = require("../../../../lib/jsdom/level2/core").dom.level2.core;
+    dom = require("../../../../lib/jsdom/level3/core").dom.level3.core;
 
-exports.hc_staff = function() {
+/*<html xmlns="http://www.w3.org/1999/xhtml"><head><title>hc_nodtdstaff</title></head><body onload="parent.loadComplete()">
+
+</body></html>*/
+
+exports.hc_nodtdstaff = function() {
 
   var doc = new dom.Document("html");
   var implementation = new dom.DOMImplementation(doc, {
@@ -64,95 +68,46 @@ exports.hc_staff = function() {
   var body      = doc.createElementNS("http://www.w3.org/2000/xmlns/","body");
   var staff     = html.appendChild(body);
 
-  var employees = [];
-  var addresses = [];
-  var names     = [];
-  var positions = [];
-  var genders   = [];
-  var ids       = [];
-  var salaries  = [];
 
-  // create 5 employees
-  for (var i=0; i<5; i++)
-  {
-    var employee = doc.createElementNS("http://www.w3.org/2000/xmlns/","p");
-    var address  = doc.createElementNS("http://www.w3.org/2000/xmlns/","acronym");
-    var name     = doc.createElementNS("http://www.w3.org/2000/xmlns/","strong");
-    var position = doc.createElementNS("http://www.w3.org/2000/xmlns/","code");
-    var gender   = doc.createElementNS("http://www.w3.org/2000/xmlns/","var");
-    var id       = doc.createElementNS("http://www.w3.org/2000/xmlns/","em");
-    var salary   = doc.createElementNS("http://www.w3.org/2000/xmlns/","sup");
+  var employee = doc.createElementNS("http://www.w3.org/2000/xmlns/","p");
+  var address  = doc.createElementNS("http://www.w3.org/2000/xmlns/","acronym");
+  var name     = doc.createElementNS("http://www.w3.org/2000/xmlns/","strong");
+  var position = doc.createElementNS("http://www.w3.org/2000/xmlns/","code");
+  var gender   = doc.createElementNS("http://www.w3.org/2000/xmlns/","var");
+  var id       = doc.createElementNS("http://www.w3.org/2000/xmlns/","em");
+  var salary   = doc.createElementNS("http://www.w3.org/2000/xmlns/","sup");
 
-    employee.appendChild(doc.createTextNode("\n"));
-    employee.appendChild(id);
-    employee.appendChild(doc.createTextNode("\n"));
-    employee.appendChild(name);
-    employee.appendChild(doc.createTextNode("\n"));
-    employee.appendChild(position);
-    employee.appendChild(doc.createTextNode("\n"));
-    employee.appendChild(salary);
-    employee.appendChild(doc.createTextNode("\n"));
-    employee.appendChild(gender);
-    employee.appendChild(doc.createTextNode("\n"));
-    employee.appendChild(address);
-    employee.appendChild(doc.createTextNode("\n"));
-    staff.appendChild(employee);
 
-    names.push(name);
-    employees.push(employee);
-    addresses.push(address);
-    genders.push(gender);
-    positions.push(position);
-    ids.push(id);
-    salaries.push(salary);
-  }
+  employee.appendChild(id);
+  employee.appendChild(doc.createTextNode("\n"));
+  employee.appendChild(name);
+  employee.appendChild(doc.createTextNode("\n"));
+  employee.appendChild(position);
+  employee.appendChild(doc.createTextNode("\n"));
+  employee.appendChild(salary);
+  employee.appendChild(doc.createTextNode("\n"));
+  employee.appendChild(gender);
+  employee.appendChild(doc.createTextNode("\n"));
+  employee.appendChild(address);
+  employee.appendChild(doc.createTextNode("\n"));
+  staff.appendChild(employee);
 
-  ids[0].appendChild(doc.createTextNode("EMP0001"));
-  salaries[0].appendChild(doc.createTextNode("56,000"));
-  addresses[0].setAttribute("title", "Yes");
-  addresses[0].appendChild(doc.createTextNode('1230 North Ave. Dallas, Texas 98551'));
-  names[0].appendChild(doc.createTextNode("Margaret Martin"));
-  genders[0].appendChild(doc.createTextNode("Female"));
-  positions[0].appendChild(doc.createTextNode("Accountant"));
+  /*<p>
+    <em>EMP0001</em>
+    <strong>Margaret Martin</strong>
+    <code>Accountant</code>
+    <sup>56,000</sup>
+    <var>Female</var>
+    <acronym title="Yes">1230 North Ave. Dallas, Texas 98551</acronym>
+   </p>*/
 
-  ids[1].appendChild(doc.createTextNode("EMP0002"));
-  salaries[1].appendChild(doc.createTextNode("35,000"));
-  addresses[1].setAttribute("title", "Yes");
-  addresses[1].setAttribute("class", "Yes");
-  addresses[1].appendChild(doc.createTextNode("β Dallas, γ\n 98554"));
-  names[1].appendChild(doc.createTextNode("Martha Raynolds"));
-  names[1].appendChild(doc.createCDATASection("This is a CDATASection with EntityReference number 2 &amp;ent2;"));
-  names[1].appendChild(doc.createCDATASection("This is an adjacent CDATASection with a reference to a tab &amp;tab;"));
-  genders[1].appendChild(doc.createTextNode("Female"));
-  positions[1].appendChild(doc.createTextNode("Secretary"));
-
-  ids[2].appendChild(doc.createTextNode("EMP0003"));
-  salaries[2].appendChild(doc.createTextNode("100,000"));
-  addresses[2].setAttribute("title", "Yes");
-  addresses[2].setAttribute("class", "No");
-  addresses[2].appendChild(doc.createTextNode("PO Box 27 Irving, texas 98553"));
-  names[2].appendChild(doc.createTextNode("Roger\n Jones")) ;
-  genders[2].appendChild(doc.createEntityReference("&delta;"));//Text("&delta;"));
-  positions[2].appendChild(doc.createTextNode("Department Manager"));
-
-  ids[3].appendChild(doc.createTextNode("EMP0004"));
-  salaries[3].appendChild(doc.createTextNode("95,000"));
-  addresses[3].setAttribute("title", "Yes");
-  addresses[3].setAttribute("class", "Yα");
-  addresses[3].appendChild(doc.createTextNode("27 South Road. Dallas, Texas 98556"));
-  names[3].appendChild(doc.createTextNode("Jeny Oconnor"));
-  genders[3].appendChild(doc.createTextNode("Female"));
-  positions[3].appendChild(doc.createTextNode("Personal Director"));
-
-  ids[4].appendChild(doc.createTextNode("EMP0005"));
-  salaries[4].appendChild(doc.createTextNode("90,000"));
-  addresses[4].setAttribute("title", "Yes");
-  addresses[4].appendChild(doc.createTextNode("1821 Nordic. Road, Irving Texas 98558"));
-  names[4].appendChild(doc.createTextNode("Robert Myers"));
-  genders[4].appendChild(doc.createTextNode("male"));
-  positions[4].appendChild(doc.createTextNode("Computer Specialist"));
-
-  doc.appendChild(doc.createProcessingInstruction("TEST-STYLE", "PIDATA"));
+  id.appendChild(doc.createTextNode("EMP0001"));
+  salary.appendChild(doc.createTextNode("56,000"));
+  address.setAttribute("title", "Yes");
+  address.appendChild(doc.createTextNode('1230 North Ave. Dallas, Texas 98551'));
+  name.appendChild(doc.createTextNode("Margaret Martin"));
+  gender.appendChild(doc.createTextNode("Female"));
+  position.appendChild(doc.createTextNode("Accountant"));
 
   doc.normalize();
   return doc;

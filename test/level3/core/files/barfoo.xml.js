@@ -28,15 +28,16 @@ module.exports.barfoo =  function() {
   ent2Element.appendChild(doc.createTextNode("foo"));
   ent2Element.appendChild(doc.createElement('br'));
 
-  var ent2 =  doc.createEntityNode("ent2", ent2Element);
+/*  var ent2 =  doc.createEntityNode("ent2", ent2Element);
   var entities = new dom.EntityNodeMap(
     doc,
     ent1,
     ent2
-  );
+  );*/
+  var entities = new dom.EntityNodeMap();
 
   // <!DOCTYPE html [
-  var doctype = new dom.DocumentType(
+  var docType = new dom.DocumentType(
     doc,
     'html',
     entities,
@@ -44,15 +45,13 @@ module.exports.barfoo =  function() {
     new dom.NamedNodeMap(doc)
   );
 
-  doc.doctype = doctype;
+  doc.doctype = docType;
 
   doc.implementation =  new dom.DOMImplementation(doc, {
     "XML" : ["1.0", "2.0"],
     "core": ["1.0", "2.0", "3.0"]
   });
 
-  var doc = dom.createDocument(docType);
-  doc
   // <html xmlns='http://www.w3.org/1999/xhtml'>
   var html      = doc.createElementNS("http://www.w3.org/2000/xmlns/","html");
 
