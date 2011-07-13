@@ -36,6 +36,9 @@ exports.hc_staff = function() {
 
 
   var doctype = new dom.DocumentType(doc, "xml", entities, notations, defaultAttributes);
+
+  doc._inputEncoding = 'UTF-8';
+
   doc.doctype = doctype;
   doc.implementation = implementation;
 

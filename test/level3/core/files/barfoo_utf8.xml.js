@@ -31,6 +31,9 @@ var core = require('../../../../lib/jsdom/level3/core').dom.level3.core;
 
 exports.barfoo_utf8 = function() {
   var doc = new core.Document();
+  doc._inputEncoding = 'uTf-8';
+  doc._xmlEncoding = 'uTf-8';
+
   var ns = 'http://www.w3.org/2000/xmlns/';
   var implementation = new core.DOMImplementation(doc, {'XML':  ['1.0', '2.0'], 'core': ['1.0', '2.0', '3.0']});
 

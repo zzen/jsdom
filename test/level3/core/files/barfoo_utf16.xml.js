@@ -26,6 +26,11 @@ var core = require('../../../../lib/jsdom/level3/core').dom.level3.core;
 
 exports.barfoo_utf16 = function() {
   var doc = new core.Document();
+
+  // Somehow the parser needs to know that utf-16 is actually UTF-16BE?
+  doc._inputEncoding = 'uTf-16BE';
+  doc._xmlEncoding ='uTf-16';
+
   var ns = 'http://www.w3.org/2000/xmlns/';
   var implementation = new core.DOMImplementation(doc, {'XML':  ['1.0', '2.0'], 'core': ['1.0', '2.0', '3.0']});
 

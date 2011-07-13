@@ -7,7 +7,7 @@
 <!ELEMENT head (title,script*)>
 <!ELEMENT title (#PCDATA)>
 <!ELEMENT script (#PCDATA)>
-<!ATTLIST script 
+<!ATTLIST script
      src CDATA #IMPLIED
      type CDATA #IMPLIED
      charset CDATA #IMPLIED>
@@ -25,3 +25,9 @@
 </body>
 </html>
 */
+
+module.exports.barfoo_standalone_no = function() {
+
+
+
+};
