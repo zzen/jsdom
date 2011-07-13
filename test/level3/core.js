@@ -86,9 +86,9 @@ exports.tests = {
     var doc = hc_staff.hc_staff();
     var typeInfo = doc.getElementsByTagName("acronym").item(0).getAttributeNode("title").schemaTypeInfo;
     test.notEqual(typeInfo, undefined, 'schemaTypeInfo is not yet implemented!');
-    // test.notEqual(typeInfo, null, 'typeInfoNotNull');
-    // test.equal(typeInfo.typeName, "string", 'nameIsString');
-    // test.equal(typeInfo.typeNamespace, "http://www.w3.org/2001/XMLSchema", 'nsIsXML');
+    test.notEqual(typeInfo, null, 'typeInfoNotNull');
+    test.equal(typeInfo.typeName, "string", 'nameIsString');
+    test.equal(typeInfo.typeNamespace, "http://www.w3.org/2001/XMLSchema", 'nsIsXML');
     test.done()
   },
 
@@ -106,9 +106,9 @@ exports.tests = {
     var doc = hc_staff.hc_staff();
     var typeInfo = doc.getElementsByTagName("acronym").item(3).getAttributeNode("id").schemaTypeInfo;
     test.notEqual(typeInfo, undefined, 'schemaTypeInfo is not yet implemented!');
-    // test.notEqual(typeInfo, null, 'typeInfoNotNull');
-    // test.equal(typeInfo.typeName, "ID", 'nameIsID');
-    // test.equal(typeInfo.typeNamespace, "http://www.w3.org/2001/XMLSchema", 'nsIsXmlSchema');
+    test.notEqual(typeInfo, null, 'typeInfoNotNull');
+    test.equal(typeInfo.typeName, "ID", 'nameIsID');
+    test.equal(typeInfo.typeNamespace, "http://www.w3.org/2001/XMLSchema", 'nsIsXmlSchema');
     test.done()
   },
 
@@ -125,9 +125,9 @@ exports.tests = {
     var doc = hc_staff.hc_staff();
     var typeInfo = doc.getElementsByTagName("acronym").item(2).getAttributeNode("class").schemaTypeInfo;
     test.notEqual(typeInfo, undefined, 'schemaTypeInfo is not yet implemented!');
-    // test.notEqual(typeInfo, null, 'typeInfoNotNull');
-    // test.equal(typeInfo.typeName, "classType", 'nameIsClassType');
-    // test.equal(typeInfo.typeNamespace, "http://www.w3.org/1999/xhtml", 'nsIsXHTML');
+    test.notEqual(typeInfo, null, 'typeInfoNotNull');
+    test.equal(typeInfo.typeName, "classType", 'nameIsClassType');
+    test.equal(typeInfo.typeNamespace, "http://www.w3.org/1999/xhtml", 'nsIsXHTML');
     test.done()
   },
 
@@ -144,9 +144,9 @@ exports.tests = {
     var doc = hc_nodtdstaff.hc_nodtdstaff();
     var typeInfo = doc.getElementsByTagName("acronym").item(0).getAttributeNode("title").schemaTypeInfo;
     test.notEqual(typeInfo, undefined, 'schemaTypeInfo is not yet implemented!');
-    // test.notEqual(typeInfo, null, 'typeInfoNotNull');
-    // test.equal(typeInfo.typeName, null, 'typeName');
-    // test.equal(typeInfo.typeNamespace, null, 'typeNS');
+    test.notEqual(typeInfo, null, 'typeInfoNotNull');
+    test.equal(typeInfo.typeName, null, 'typeName');
+    test.equal(typeInfo.typeNamespace, null, 'typeNS');
     test.done()
   },
 
@@ -168,9 +168,9 @@ exports.tests = {
     var doc = hc_staff.hc_staff();
     var typeInfo = doc.getElementsByTagName("acronym").item(3).getAttributeNode("id").schemaTypeInfo;
     test.notEqual(typeInfo, undefined, 'schemaTypeInfo is not yet implemented!');
-    // test.notEqual(typeInfo, null, 'typeInfoNotNull');
-    // test.equal(typeInfo.typeName, "ID", 'attrgetschematypeinfo07_typeName');
-    // test.equal(typeInfo.typeNamespace, "http://www.w3.org/2001/XMLSchema", 'attrgetschematypeinfo07_typeNamespace');
+    test.notEqual(typeInfo, null, 'typeInfoNotNull');
+    test.equal(typeInfo.typeName, "ID", 'attrgetschematypeinfo07_typeName');
+    test.equal(typeInfo.typeNamespace, "http://www.w3.org/2001/XMLSchema", 'attrgetschematypeinfo07_typeNamespace');
     test.done()
   },
 
@@ -191,8 +191,8 @@ exports.tests = {
     var doc = hc_staff.hc_staff();
     var typeInfo = doc.getElementsByTagName("acronym").item(0).getAttributeNode("title").schemaTypeInfo;
     test.notEqual(typeInfo, undefined, 'schemaTypeInfo is not yet implemented!');
-    // test.equal(typeInfo.typeName, "string", 'attrgetschematypeinfo08_typeName');
-    // test.equal(typeInfo.typeNamespace, "http://www.w3.org/2001/XMLSchema", 'attrgetschematypeinfo08_typeNamespace');
+    test.equal(typeInfo.typeName, "string", 'attrgetschematypeinfo08_typeName');
+    test.equal(typeInfo.typeNamespace, "http://www.w3.org/2001/XMLSchema", 'attrgetschematypeinfo08_typeNamespace');
     test.done()
   },
 
@@ -7242,8 +7242,8 @@ exports.tests = {
    */
   documentsetdocumenturi01: function (test) {
     var doc = hc_staff.hc_staff();
-    doc.documentURI = "file:///test";
-    test.equal(doc.documentURI, "file:///test", 'documentsetdocumenturi01');
+    doc.documentURI = "file:test";
+    test.equal(doc.documentURI, "file:test", 'documentsetdocumenturi01');
     test.done()
   },
 
@@ -9153,7 +9153,7 @@ exports.tests = {
   domimplementationregistry01: function (test) {
     test.ok(false, 'test relies on DOMImplementationRegistry which is not yet implemented')
     // var domImplRegistry = DOMImplementationRegistry;
-    // test.notEqual(domImplRegistry, null, 'domImplRegistryNotNull');
+    test.notEqual(domImplRegistry, null, 'domImplRegistryNotNull');
     test.done()
   },
 
@@ -9181,9 +9181,9 @@ exports.tests = {
     // var domImplRegistry = DOMImplementationRegistry;
     // xs.forEach(function(x){
     //   var domImpl = domImplRegistry.getDOMImplementation(x[0]);
-    //   test.notEqual(domImpl, null, 'domImplNotNull');
+    test.notEqual(domImpl, null, 'domImplNotNull');
     //   for (var k in x[1]) {
-    //     test.ok(domImpl.hasFeature(k, x[1][k]), 'has ' + k);
+    test.ok(domImpl.hasFeature(k, x[1][k]), 'has ' + k);
     //   }
     // });
     test.done()
@@ -9202,7 +9202,7 @@ exports.tests = {
     test.ok(false, 'test relies on DOMImplementationRegistry which is not yet implemented')
     // var domImplRegistry = DOMImplementationRegistry;
     // var domImpl = domImplRegistry.getDOMImplementation('http://www.example.com/bogus-feature 99.0');
-    // test.equal(domImpl, null, 'domImplNull');
+    test.equal(domImpl, null, 'domImplNull');
     test.done()
   },
 
@@ -9224,9 +9224,9 @@ exports.tests = {
     //   var domImpl = domImplRegistry.getDOMImplementation(feature);
     //   if (domImpl == null) {
     //     var baseImpl = getImplementation();
-    //     test.equal(baseImpl.hasFeature(feature, null), false, 'baseImplSupports'+feature);
+    test.equal(baseImpl.hasFeature(feature, null), false, 'baseImplSupports'+feature);
     //   } else {
-    //     test.ok(domImpl.hasFeature(feature, null), 'hasCore'+feature);
+    test.ok(domImpl.hasFeature(feature, null), 'hasCore'+feature);
     //   }
     // });
     test.done()
@@ -9248,15 +9248,15 @@ exports.tests = {
     // var domImpl = domImplRegistry.getDOMImplementation('cOrE 3.0 xMl 3.0 eVeNts 2.0 lS');
     // if (domImpl == null) {
     //   var baseImpl = getImplementation();
-    //   test.equal(baseImpl.hasFeature('Core', '3.0'), false, 'baseImplFeatures');
-    //   test.equal(baseImpl.hasFeature('XML', '3.0'), false, 'baseImplFeatures');
-    //   test.equal(baseImpl.hasFeature('Events', '2.0'), false, 'baseImplFeatures');
-    //   test.equal(baseImpl.hasFeature('LS', null), false, 'baseImplFeatures');
+    test.equal(baseImpl.hasFeature('Core', '3.0'), false, 'baseImplFeatures');
+    test.equal(baseImpl.hasFeature('XML', '3.0'), false, 'baseImplFeatures');
+    test.equal(baseImpl.hasFeature('Events', '2.0'), false, 'baseImplFeatures');
+    test.equal(baseImpl.hasFeature('LS', null), false, 'baseImplFeatures');
     // } else {
-    //   test.ok(domImpl.hasFeature('Core', '3.0'), 'hasCore');
-    //   test.ok(domImpl.hasFeature('XML', '3.0'), 'hasXML');
-    //   test.ok(domImpl.hasFeature('Events', '2.0'), 'hasEvents');
-    //   test.ok(domImpl.hasFeature('LS', null), 'hasLS');
+    test.ok(domImpl.hasFeature('Core', '3.0'), 'hasCore');
+    test.ok(domImpl.hasFeature('XML', '3.0'), 'hasXML');
+    test.ok(domImpl.hasFeature('Events', '2.0'), 'hasEvents');
+    test.ok(domImpl.hasFeature('LS', null), 'hasLS');
     // }
     test.done()
   },
@@ -9287,11 +9287,11 @@ exports.tests = {
     // var domImplRegistry = DOMImplementationRegistry;
     // xs.forEach(function(x){
     //   var domImplList = domImplRegistry.getDOMImplementationList(x[0]);
-    //   test.ok((domImplList.length > 0), 'atLeastOne');
-    //   test.equal(domImplList.item(domImplList.length), null, 'item_Length_shouldBeNull');
+    test.ok((domImplList.length > 0), 'atLeastOne');
+    test.equal(domImplList.item(domImplList.length), null, 'item_Length_shouldBeNull');
     //   for(var i=0;i<domImplList.length;i++) {
     //     for (var k in x[1]) {
-    //       test.ok(domImplList.item(i).hasFeature(k, x[1][k]), 'has '+k);
+    test.ok(domImplList.item(i).hasFeature(k, x[1][k]), 'has '+k);
     //     }
     //   }
     // });
@@ -9312,7 +9312,7 @@ exports.tests = {
     test.ok(false, 'test relies on DOMImplementationRegistry which is not yet implemented')
     // var domImplRegistry = DOMImplementationRegistry;
     // var domImplList = domImplRegistry.getDOMImplementationList("http://www.example.com/bogus-feature 99.0");
-    // test.equal(domImplList.length, 0, 'emptyList');
+    test.equal(domImplList.length, 0, 'emptyList');
     test.done()
   },
 
@@ -9334,10 +9334,10 @@ exports.tests = {
     //   var domImplList = domImplRegistry.getDOMImplementationList(feature);
     //   if (domImplList.length == 0) {
     //     var baseImpl = getImplementation();
-    //     test.equal(baseImpl.hasFeature(feature, null), false, 'baseImplSupports'+feature);
+    test.equal(baseImpl.hasFeature(feature, null), false, 'baseImplSupports'+feature);
     //   } else {
     //     for(var i=0;i<domImplList.length;i++) {
-    //       test.ok(domImplList.item(i).hasFeature(feature, null), 'hasCore'+feature);
+    test.ok(domImplList.item(i).hasFeature(feature, null), 'hasCore'+feature);
     //     }
     //   }
     // });
@@ -9360,16 +9360,16 @@ exports.tests = {
     // var domImplList = domImplRegistry.getDOMImplementationList('cOrE 3.0 xMl 3.0 eVeNts 2.0 lS');
     // if (domImplList.length == 0) {
     //   var baseImpl = getImplementation();
-    //   test.equal(baseImpl.hasFeature('Core','3.0'), false, 'baseImplFeatures');
-    //   test.equal(baseImpl.hasFeature('XML','3.0'), false, 'baseImplFeatures');
-    //   test.equal(baseImpl.hasFeature('Events','2.0'), false, 'baseImplFeatures');
-    //   test.equal(baseImpl.hasFeature('LS', null), false, 'baseImplFeatures');
+    test.equal(baseImpl.hasFeature('Core','3.0'), false, 'baseImplFeatures');
+    test.equal(baseImpl.hasFeature('XML','3.0'), false, 'baseImplFeatures');
+    test.equal(baseImpl.hasFeature('Events','2.0'), false, 'baseImplFeatures');
+    test.equal(baseImpl.hasFeature('LS', null), false, 'baseImplFeatures');
     // } else {
     //   for(var i=0;i<domImplList.length;i++) {
-    //     test.ok(domImplList.item(i).hasFeature('Core','3.0'), 'hasCore');
-    //     test.ok(domImplList.item(i).hasFeature('XML','3.0'), 'hasXML');
-    //     test.ok(domImplList.item(i).hasFeature('Events','2.0'), 'hasEvents');
-    //     test.ok(domImplList.item(i).hasFeature('LS', null), 'hasLS');
+    test.ok(domImplList.item(i).hasFeature('Core','3.0'), 'hasCore');
+    test.ok(domImplList.item(i).hasFeature('XML','3.0'), 'hasXML');
+    test.ok(domImplList.item(i).hasFeature('Events','2.0'), 'hasEvents');
+    test.ok(domImplList.item(i).hasFeature('LS', null), 'hasLS');
     //   }
     // }
     test.done()
@@ -9388,7 +9388,7 @@ exports.tests = {
   domimplementationregistry24: function (test) {
     test.ok(false, 'test relies on DOMImplementationRegistry which is not yet implemented')
     // var domImplRegistry = DOMImplementationRegistry;
-    // test.notEqual(domImplRegistry.getDOMImplementation(''), null, 'domImplNotNull');
+    test.notEqual(domImplRegistry.getDOMImplementation(''), null, 'domImplNotNull');
     test.done()
   },
 
@@ -9407,7 +9407,7 @@ exports.tests = {
     test.ok(false, 'test relies on DOMImplementationRegistry which is not yet implemented')
     // var domImplRegistry = DOMImplementationRegistry;
     // var domImplList = domImplRegistry.getDOMImplementationList('');
-    // test.ok((domImplList.length > 0), 'atLeastOne');
+    test.ok((domImplList.length > 0), 'atLeastOne');
     test.done()
   },
 
@@ -19291,13 +19291,13 @@ exports.tests = {
    */
   nodeisequalnode18: function (test) {
     test.ok(false, 'NOTE: test relies on adoptNode, which has not yet been implemented')
-    // var doc = hc_staff.hc_staff();
-    // var newDoc = doc.implementation.createDocument(doc.documentElement.namespaceURI, doc.documentElement.tagName, null);
-    // var attr1 = doc.createAttributeNS(null, 'title');
-    // var attr2 = newDoc.adoptNode(attr1);
-    // if (attr2 != null) {
-    //   test.ok(attr1.isEqualNode(attr2), 'nodeisequalnode18');
-    // }
+    var doc = hc_staff.hc_staff();
+    var newDoc = doc.implementation.createDocument(doc.documentElement.namespaceURI, doc.documentElement.tagName, null);
+    var attr1 = doc.createAttributeNS(null, 'title');
+    var attr2 = newDoc.adoptNode(attr1);
+    if (attr2 != null) {
+      test.ok(attr1.isEqualNode(attr2), 'nodeisequalnode18');
+    }
     test.done()
   },
 
