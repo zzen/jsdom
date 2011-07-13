@@ -47,9 +47,9 @@ exports.tests = {
     var doc = hc_staff.hc_staff();
     var typeInfo = doc.getElementsByTagName("acronym").item(0).getAttributeNode("title").schemaTypeInfo;
     test.notEqual(typeInfo, undefined, 'schemaTypeInfo is not yet implemented!');
-    // test.notEqual(typeInfo, null, 'typeInfoNotNull');
-    // test.equal(typeInfo.typeName, "CDATA", 'nameIsCDATA');
-    // test.equal(typeInfo.typeNamespace, "http://www.w3.org/TR/REC-xml", 'nsIsXML');
+    test.notEqual(typeInfo, null, 'typeInfoNotNull');
+    test.equal(typeInfo.typeName, "CDATA", 'nameIsCDATA');
+    test.equal(typeInfo.typeNamespace, "http://www.w3.org/TR/REC-xml", 'nsIsXML');
     test.done()
   },
 
@@ -66,9 +66,9 @@ exports.tests = {
     var doc = hc_staff.hc_staff();
     var typeInfo = doc.getElementsByTagName("acronym").item(3).getAttributeNode("id").schemaTypeInfo;
     test.notEqual(typeInfo, undefined, 'schemaTypeInfo is not yet implemented!');
-    // test.notEqual(typeInfo, null, 'typeInfoNotNull');
-    // test.equal(typeInfo.typeName, "ID", 'nameIsID');
-    // test.equal(typeInfo.typeNamespace, "http://www.w3.org/TR/REC-xml", 'nsIsXML');
+    test.notEqual(typeInfo, null, 'typeInfoNotNull');
+    test.equal(typeInfo.typeName, "ID", 'nameIsID');
+    test.equal(typeInfo.typeNamespace, "http://www.w3.org/TR/REC-xml", 'nsIsXML');
     test.done()
   },
 
