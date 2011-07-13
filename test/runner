@@ -13,7 +13,10 @@ var modules = {};
 var currentModule = "";
 var moduleIndex = 0;
 var start = new Date().getTime();
-
+var fileFilter = [];
+if (process.argv.length > 2) {
+  fileFilter = process.argv[2].split(',');
+}
 var files = [ 
   "level1/core.js",
   "level1/html.js",
@@ -32,11 +35,26 @@ var files = [
    "sizzle/index.js"
 ];
 
+files.sort();
 
+if (fileFilter) {
+  files = files.filter(function(val) {
+   var ok = false;
+   fileFilter.forEach(function(v) {
+     if (val.indexOf(v) > -1) {
+      ok = true;
+     }
+   });
+   return ok;
+  });
+}
 
 var paths = files.map(function (p) {
   return path.join(__dirname, p);
 });
+
+paths.sort();
+
 nodeunit.runFiles(paths, {
   moduleStart: function (name) {
     currentModule = files[moduleIndex].replace('.js', '');
@@ -75,7 +93,8 @@ nodeunit.runFiles(paths, {
           }   
           console.log(a.error.stack + '\n');
         } 
-      }); 
+      });
+      process.exit();
     }
   },
   done: function (assertions) {
