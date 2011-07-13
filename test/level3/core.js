@@ -5,8 +5,8 @@ var barfoo_standalone_no = require("./core/files/barfoo_standalone_no.xml");
 var barfoo_standalone_yes = require("./core/files/barfoo_standalone_yes.xml");
 var barfoo_utf16 = require("./core/files/barfoo_utf16.xml");
 var barfoo_utf8 = require("./core/files/barfoo_utf8.xml");
-// var canonicalform01 = require("./core/files/canonicalform01.xml");
-// var canonicalform03 = require("./core/files/canonicalform03.xml");
+var canonicalform01 = require("./core/files/canonicalform01.xml");
+var canonicalform03 = require("./core/files/canonicalform03.xml");
 var datatype_normalization = require("./core/files/datatype_normalization.xml");
 var datatype_normalization2 = require("./core/files/datatype_normalization2.xml");
 var external_barfoo = require("./core/files/external_barfoo.xml");
@@ -1054,7 +1054,7 @@ exports.tests = {
 
     textValue = text.nodeValue;
 
-    test.equal(textValue, "barsucon", 'noCharNormalization');
+    test.equal(textValue, "barsuçon", 'noCharNormalization');
 
     test.done()
   },

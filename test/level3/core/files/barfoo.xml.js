@@ -39,7 +39,7 @@ module.exports.barfoo =  function() {
   // <!DOCTYPE html [
   var docType = new dom.DocumentType(
     doc,
-    'html',
+    'xml',
     entities,
     new dom.NotationNodeMap(doc),
     new dom.NamedNodeMap(doc)
