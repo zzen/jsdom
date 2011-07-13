@@ -17,6 +17,7 @@ var fileFilter = [];
 if (process.argv.length > 2) {
   fileFilter = process.argv[2].split(',');
 }
+
 var files = [ 
   "level1/core.js",
   "level1/html.js",
@@ -37,7 +38,7 @@ var files = [
 
 files.sort();
 
-if (fileFilter) {
+if (fileFilter.length > 0) {
   files = files.filter(function(val) {
    var ok = false;
    fileFilter.forEach(function(v) {
