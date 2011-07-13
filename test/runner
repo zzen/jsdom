@@ -50,8 +50,8 @@ var files = [
   /*  
    TODO: this needs work, will break everything if included.
    "window",*/
-   "jsdom/index.js",
-   "sizzle/index.js"
+   "sizzle/index.js",
+   "jsdom/index.js"
 ];
 
 if (fileFilter.length > 0) {
