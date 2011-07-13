@@ -5,6 +5,7 @@ var nodeunit = require('nodeunit'),
     path = require('path'),
     AssertionError = require('assert').AssertionError;
 
+require('console.log');
 
 var totalTests = 0;
 var failedTests = 0;
@@ -17,6 +18,23 @@ var fileFilter = [];
 if (process.argv.length > 2) {
   fileFilter = process.argv[2].split(',');
 }
+
+var assert = require('nodeunit/lib/assert');
+require('nodeunit/lib/assert').equal = function equal(actual, expected, message) {
+  if (actual != expected) {
+    if (actual && actual.nodeType) {
+      actual = actual.toString();
+    }   
+
+    if (expected && expected.nodeType) {
+      expected = expected.toString();
+    }   
+
+    assert.fail(actual, expected, message, '==', assert.equal);
+  }
+};
+
+
 
 var files = [ 
   "level1/core.js",
@@ -95,7 +113,7 @@ nodeunit.runFiles(paths, {
           console.log(a.error.stack + '\n');
         } 
       });
-      process.exit();
+   //   process.exit();
     }
   },
   done: function (assertions) {
