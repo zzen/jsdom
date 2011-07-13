@@ -223,15 +223,14 @@ exports.tests = {
    * @see http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core#Attr-isId
    */
   attrisid02: function (test) {
-    test.ok(false, 'this test depends on setIdAttributeNS, which has not been implemented yet')
-    // var xmlNS = "http://www.w3.org/XML/1998/namespace";
-    // var doc = hc_staff.hc_staff();
-    // var acronymElem = doc.getElementsByTagName("acronym").item(2);
-    // acronymElem.setAttributeNS(xmlNS, "xml:lang", "FR-fr");
-    // acronymElem.setIdAttributeNS(xmlNS,"lang", true);
-    // var attr = acronymElem.getAttributeNodeNS(xmlNS, "lang");
-    // test.ok(attr.isId, 'AttrIsIDTrue02');
-    test.done()
+    var xmlNS = "http://www.w3.org/XML/1998/namespace";
+    var doc = hc_staff.hc_staff();
+    var acronymElem = doc.getElementsByTagName("acronym").item(2);
+    acronymElem.setAttributeNS(xmlNS, "xml:lang", "FR-fr");
+    acronymElem.setIdAttributeNS(xmlNS,"lang", true);
+    var attr = acronymElem.getAttributeNodeNS(xmlNS, "lang");
+    test.ok(attr.isId, 'AttrIsIDTrue02');
+    test.done();
   },
 
   /**
@@ -243,14 +242,13 @@ exports.tests = {
    * @see http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core#Attr-isId
    */
   attrisid03: function (test) {
-    test.ok(false, 'this test depends on setIdAttributeNS, which has not been implemented yet')
-    // var xmlNS = "http://www.w3.org/XML/1998/namespace";
-    // var doc = hc_staff.hc_staff();
-    // var acronymElem = doc.getElementsByTagName("acronym").item(2);
-    // acronymElem.setAttributeNS(xmlNS, "xml:lang", "FR-fr");
-    // acronymElem.setIdAttributeNS(xmlNS, "lang", false);
-    // var attr = acronymElem.getAttributeNodeNS(xmlNS,"lang");
-    // test.equal(attr.isId, false, 'AttrIsIDFalse03');
+    var xmlNS = "http://www.w3.org/XML/1998/namespace";
+    var doc = hc_staff.hc_staff();
+    var acronymElem = doc.getElementsByTagName("acronym").item(2);
+    acronymElem.setAttributeNS(xmlNS, "xml:lang", "FR-fr");
+    acronymElem.setIdAttributeNS(xmlNS, "lang", false);
+    var attr = acronymElem.getAttributeNodeNS(xmlNS,"lang");
+    test.equal(attr.isId, false, 'AttrIsIDFalse03');
     test.done()
   },
 
@@ -321,15 +319,14 @@ exports.tests = {
    * @see http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core#Attr-isId
    */
   attrisid07: function (test) {
-    test.ok(false, 'this test depends on setIdAttributeNS, which has not been implemented yet')
-    // var doc = hc_staff.hc_staff();
-    // var acronymElem = doc.getElementsByTagNameNS("*","acronym").item(2);
-    // acronymElem.setAttributeNS("http://www.w3.org/DOM","dom3:newAttr", "null");
-    // acronymElem.setIdAttributeNS("http://www.w3.org/DOM","newAttr", true);
-    // var attr = acronymElem.getAttributeNodeNS("http://www.w3.org/DOM", "newAttr");
-    // test.ok(attr.isId, 'AttrIsIDTrue07_1');
-    // var attrImported = doc.importNode(attr, false);
-    // test.equal(attrImported.isId, false, 'AttrIsID07_isFalseforImportedNode');
+    var doc = hc_staff.hc_staff();
+    var acronymElem = doc.getElementsByTagNameNS("*","acronym").item(2);
+    acronymElem.setAttributeNS("http://www.w3.org/DOM","dom3:newAttr", "null");
+    acronymElem.setIdAttributeNS("http://www.w3.org/DOM","newAttr", true);
+    var attr = acronymElem.getAttributeNodeNS("http://www.w3.org/DOM", "newAttr");
+    test.ok(attr.isId, 'AttrIsIDTrue07_1');
+    var attrImported = doc.importNode(attr, false);
+    test.equal(attrImported.isId, false, 'AttrIsID07_isFalseforImportedNode');
     test.done()
   },
 
