@@ -18,7 +18,7 @@ module.exports.canonicalform03 =  function() {
     new dom.NotationNodeMap(doc),
     new dom.NamedNodeMap(doc)
   );
-console.log(docType.name);
+
   doc.doctype = docType;
 
   doc.implementation =  new dom.DOMImplementation(doc, {

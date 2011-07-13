@@ -4071,11 +4071,7 @@ exports.tests = {
     doc = staff.staff();
     elementList = doc.getElementsByTagName("address");
     testEmployee = elementList.item(0);
-    try {
-      domesticAttr = testEmployee.getAttributeNode("invalidAttribute");
-    } catch(e) {
-      console.log(e);
-    }
+    domesticAttr = testEmployee.getAttributeNode("invalidAttribute");
     test.equal(domesticAttr, null, 'elementGetAttributeNodeNullAssert');
 
     test.done();
