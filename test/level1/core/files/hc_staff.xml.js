@@ -1,5 +1,35 @@
 var dom = require("../../../../lib/jsdom/level1/core").dom.level1.core;
 
+/*
+<?xml version="1.0"?>
+<?TEST-STYLE PIDATA?>
+<!DOCTYPE html
+   PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "xhtml1-strict.dtd" [
+   <!ENTITY alpha "&#945;">
+   <!ENTITY beta "&#946;">
+   <!ENTITY gamma "&#947;">
+   <!ENTITY delta "&#948;">
+   <!ENTITY epsilon "&#949;">
+   <!ENTITY alpha "&#950;">
+   <!NOTATION notation1 PUBLIC "notation1File">
+   <!NOTATION notation2 SYSTEM "notation2File">
+   <!ATTLIST acronym dir CDATA "ltr">
+
+]>
+<!-- This is comment number 1.-->
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<title>hc_staff</title>
+	<script type="text/javascript" src="svgunit.js"/>
+	<script charset="UTF-8" type="text/javascript" src="svgtest.js"/>
+	<script type='text/javascript'>function loadComplete() { startTest(); }</script>
+</head>
+<body>
+</body></html>
+*/
+
 exports.hc_staff = function() {
 
   var doc = new dom.Document("html");
@@ -105,6 +135,16 @@ exports.hc_staff = function() {
     salaries.push(salary);
   }
 
+  /*
+   <p>
+    <em>EMP0001</em>
+    <strong>Margaret Martin</strong>
+    <code>Accountant</code>
+    <sup>56,000</sup>
+    <var>Female</var>
+    <acronym title="Yes">1230 North Ave. Dallas, Texas 98551</acronym>
+   </p>
+  */
   ids[0].appendChild(doc.createTextNode("EMP0001"));
   salaries[0].appendChild(doc.createTextNode("56,000"));
   addresses[0].setAttribute("title", "Yes");
@@ -113,6 +153,19 @@ exports.hc_staff = function() {
   genders[0].appendChild(doc.createTextNode("Female"));
   positions[0].appendChild(doc.createTextNode("Accountant"));
 
+  /*
+   <p>
+    <em>EMP0002</em>
+    <strong>Martha RaynoldsThis is a CDATASection with EntityReference number 2 &amp;ent2;
+  This is an adjacent CDATASection with a reference to a tab &amp;tab;</strong>
+
+    <code>Secretary</code>
+    <sup>35,000</sup>
+    <var>Female</var>
+    <acronym title="Yes" class="Yes">&beta; Dallas, &gamma;
+   98554</acronym>
+   </p>
+  */
   ids[1].appendChild(doc.createTextNode("EMP0002"));
   salaries[1].appendChild(doc.createTextNode("35,000"));
   addresses[1].setAttribute("title", "Yes");
@@ -124,6 +177,17 @@ exports.hc_staff = function() {
   genders[1].appendChild(doc.createTextNode("Female"));
   positions[1].appendChild(doc.createTextNode("Secretary"));
 
+  /*
+   <p>
+    <em>EMP0003</em>
+    <strong>Roger
+   Jones</strong>
+    <code>Department Manager</code>
+    <sup>100,000</sup>
+    <var>&delta;</var>
+    <acronym title="Yes" class="No">PO Box 27 Irving, texas 98553</acronym>
+   </p>
+  */
   ids[2].appendChild(doc.createTextNode("EMP0003"));
   salaries[2].appendChild(doc.createTextNode("100,000"));
   addresses[2].setAttribute("title", "Yes");
@@ -133,6 +197,17 @@ exports.hc_staff = function() {
   genders[2].appendChild(doc.createEntityReference("&delta;"));//Text("&delta;"));
   positions[2].appendChild(doc.createTextNode("Department Manager"));
 
+  /*
+   <p>
+    <em>EMP0004</em>
+    <strong>Jeny Oconnor</strong>
+    <code>Personnel Director</code>
+    <sup>95,000</sup>
+    <var>Female</var>
+
+    <acronym title="Yes" class="Y&alpha;">27 South Road. Dallas, Texas 98556</acronym>
+   </p>
+  */
   ids[3].appendChild(doc.createTextNode("EMP0004"));
   salaries[3].appendChild(doc.createTextNode("95,000"));
   addresses[3].setAttribute("title", "Yes");
@@ -142,6 +217,17 @@ exports.hc_staff = function() {
   genders[3].appendChild(doc.createTextNode("Female"));
   positions[3].appendChild(doc.createTextNode("Personal Director"));
 
+  /*
+   <p>
+    <em>EMP0005</em>
+    <strong>Robert Myers</strong>
+    <code>Computer Specialist</code>
+    <sup>90,000</sup>
+
+    <var>male</var>
+    <acronym title="Yes">1821 Nordic. Road, Irving Texas 98558</acronym>
+   </p>
+  */
   ids[4].appendChild(doc.createTextNode("EMP0005"));
   salaries[4].appendChild(doc.createTextNode("90,000"));
   addresses[4].setAttribute("title", "Yes");
@@ -155,82 +241,3 @@ exports.hc_staff = function() {
   doc.normalize();
   return doc;
 };
-
-/*
-<?xml version="1.0"?>
-<?TEST-STYLE PIDATA?>
-<!DOCTYPE html
-   PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-   "xhtml1-strict.dtd" [
-   <!ENTITY alpha "&#945;">
-   <!ENTITY beta "&#946;">
-   <!ENTITY gamma "&#947;">
-   <!ENTITY delta "&#948;">
-   <!ENTITY epsilon "&#949;">
-   <!ENTITY alpha "&#950;">
-   <!NOTATION notation1 PUBLIC "notation1File">
-   <!NOTATION notation2 SYSTEM "notation2File">
-   <!ATTLIST acronym dir CDATA "ltr">
-
-]>
-<!-- This is comment number 1.-->
-<html xmlns='http://www.w3.org/1999/xhtml'>
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-	<title>hc_staff</title>
-	<script type="text/javascript" src="svgunit.js"/>
-	<script charset="UTF-8" type="text/javascript" src="svgtest.js"/>
-	<script type='text/javascript'>function loadComplete() { startTest(); }</script>
-</head>
-<body>
- <p>
-  <em>EMP0001</em>
-  <strong>Margaret Martin</strong>
-  <code>Accountant</code>
-  <sup>56,000</sup>
-
-  <var>Female</var>
-  <acronym title="Yes">1230 North Ave. Dallas, Texas 98551</acronym>
- </p>
- <p>
-  <em>EMP0002</em>
-  <strong>Martha RaynoldsThis is a CDATASection with EntityReference number 2 &amp;ent2;
-This is an adjacent CDATASection with a reference to a tab &amp;tab;</strong>
-
-  <code>Secretary</code>
-  <sup>35,000</sup>
-  <var>Female</var>
-  <acronym title="Yes" class="Yes">&beta; Dallas, &gamma;
- 98554</acronym>
- </p>
-
- <p>
-  <em>EMP0003</em>
-  <strong>Roger
- Jones</strong>
-  <code>Department Manager</code>
-  <sup>100,000</sup>
-  <var>&delta;</var>
-  <acronym title="Yes" class="No">PO Box 27 Irving, texas 98553</acronym>
-
- </p>
- <p>
-  <em>EMP0004</em>
-  <strong>Jeny Oconnor</strong>
-  <code>Personnel Director</code>
-  <sup>95,000</sup>
-  <var>Female</var>
-
-  <acronym title="Yes" class="Y&alpha;">27 South Road. Dallas, Texas 98556</acronym>
- </p>
- <p>
-  <em>EMP0005</em>
-  <strong>Robert Myers</strong>
-  <code>Computer Specialist</code>
-  <sup>90,000</sup>
-
-  <var>male</var>
-  <acronym title="Yes">1821 Nordic. Road, Irving Texas 98558</acronym>
- </p>
-</body></html>
-*/

@@ -2680,6 +2680,7 @@ exports.tests = {
     childList = doc.getElementsByTagName("p");
     elementEmp = childList.item(3);
     dir = elementEmp.getAttributeNode("dir");
+console.log(dir);
     adoptedAttr = newDoc.adoptNode(dir);
 
     if(

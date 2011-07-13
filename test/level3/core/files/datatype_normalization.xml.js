@@ -65,7 +65,12 @@ module.exports.datatype_normalization =  function() {
   var a = function(el, obj) {
     var keys = Object.keys(obj);
     keys.forEach(function(v) {
-      el.setAttribute(v, obj[v]);
+      var attr = doc.createAttribute(v)
+      obj[v].split('\n').forEach(function(value) {
+        ret.appendChild(doc.createTextNode(value));
+      });
+
+      el.setAttributeNode(attr);
     });
     return el;
   };
