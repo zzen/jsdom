@@ -54,8 +54,6 @@ var files = [
    "sizzle/index.js"
 ];
 
-files.sort();
-
 if (fileFilter.length > 0) {
   files = files.filter(function(val) {
    var ok = false;
@@ -72,7 +70,6 @@ var paths = files.map(function (p) {
   return path.join(__dirname, p);
 });
 
-paths.sort();
 
 nodeunit.runFiles(paths, {
   moduleStart: function (name) {
