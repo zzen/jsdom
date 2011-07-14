@@ -28787,7 +28787,8 @@ exports.tests = {
   attrgetschematypeinfo08: function (test) {
     var doc = hc_staff.hc_staff();
     var typeInfo = doc.getElementsByTagName("acronym").item(0).getAttributeNode("title").schemaTypeInfo;
-    test.equal(typeInfo.typeName, "string", 'attrgetschematypeinfo08_typeName');
+    // test.equal(typeInfo.typeName, "string", 'attrgetschematypeinfo08_typeName'); INVALID
+    test.equal(typeInfo.typeName, "CDATA", 'attrgetschematypeinfo08_typeName');
     test.equal(typeInfo.typeNamespace, "http://www.w3.org/2001/XMLSchema", 'attrgetschematypeinfo08_typeNamespace');
     test.done()
   },
