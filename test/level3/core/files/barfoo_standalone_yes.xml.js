@@ -4,7 +4,7 @@ module.exports.barfoo_standalone_yes = function() {
 
   var doc = new dom.Document("xhtml");
   doc._inputEncoding = doc._xmlEncoding = 'UTF-8';
-  doc.xmlStandalone = true;
+  doc._xmlStandalone = true;
 
   /*
   <!ELEMENT html (head, body)>
