@@ -110,7 +110,9 @@ nodeunit.runFiles(paths, {
           console.log(a.error.stack + '\n');
         } 
       });
-    //  process.exit();
+      if (process.argv.length > 3) {
+        process.exit();
+      }
     }
   },
   done: function (assertions) {
