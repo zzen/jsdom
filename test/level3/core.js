@@ -15,18 +15,24 @@ var hc_nodtdstaff = require("./core/files/hc_nodtdstaff.xml");
 var hc_staff = require("./core/files/hc_staff.xml");
 var typeinfo = require("./core/files/typeinfo.xml");
 var DOMErrorMonitor = function() {
-  this.errors = new Array();
+  this.errors = [];
+
+  var that = this;
+  this.handleError = function(e) {
+    console.log('got error');
+    that.errors.push(e);
+  }
 }
-DOMErrorMonitor.prototype.handleError = function(e) {
-  this.errors.push(new DOMErrorImpl(e));
-}
-DOMErrorMonitor.prototype.assertLowerSeverity = function(id, severity) {
-  this.errors.forEach(function(e){
-    if (e.severity >= severity){
-      // can this ever pass? if x >= y, then ALWAYS x > (y-2)
-      test.equal(e.severity, severity-1, id);
-    }
-  });
+DOMErrorMonitor.prototype = {
+  assertLowerSeverity : function(test, id, severity) {
+    this.errors.forEach(function(e){
+      if (e.severity >= severity){
+        // can this ever pass? if x >= y, then ALWAYS x > (y-2)
+        test.equal(e.severity, severity-1, id);
+      }
+    });
+  },
+  get allErrors() { return this.errors; },
 }
 
 function UserDataNotification(operation, key, data, src, dst) {
@@ -212,7 +218,7 @@ exports.tests = {
       entRef = doc.createEntityReference("ent1");
       child = pElem.appendChild(entRef);
       doc.normalizeDocument();
-      errorMonitor.assertLowerSeverity("normalizeError", 2);
+      errorMonitor.assertLowerSeverity(test, "normalizeError", 2);
       pList = doc.getElementsByTagName("p");
       pElem = pList.item(0);
       child = pElem.lastChild;
@@ -269,7 +275,7 @@ exports.tests = {
       text = doc.createTextNode("suçon");
       retval = pElem.appendChild(text);
       doc.normalizeDocument();
-      errorMonitor.assertLowerSeverity("normalizeError", 2);
+      errorMonitor.assertLowerSeverity(test, "normalizeError", 2);
       pList = doc.getElementsByTagName("p");
       pElem = pList.item(0);
       text = pElem.firstChild;
@@ -323,7 +329,7 @@ exports.tests = {
     ) {
       domConfig.setParameter("canonical-form", true);
       doc.normalizeDocument();
-      errorMonitor.assertLowerSeverity("normalization2Error", 2);
+      errorMonitor.assertLowerSeverity(test, "normalization2Error", 2);
       elemList = doc.getElementsByTagName("strong");
       elemName = elemList.item(1);
       text = elemName.lastChild;
@@ -367,7 +373,7 @@ exports.tests = {
       domConfig.setParameter("error-handler", errorMonitor.handleError);
       domConfig.setParameter("canonical-form", true);
       doc.normalizeDocument();
-      errorMonitor.assertLowerSeverity("normalizeError", 2);
+      errorMonitor.assertLowerSeverity(test, "normalizeError", 2);
       docElem = doc.documentElement;
 
       xmlnsAttr = docElem.getAttributeNode("xmlns");
@@ -631,7 +637,7 @@ exports.tests = {
 
       }
       doc.normalizeDocument();
-      errorMonitor.assertLowerSeverity("normalizeError", 2);
+      errorMonitor.assertLowerSeverity(test, "normalizeError", 2);
       bodyList = doc.getElementsByTagName("body");
       body = bodyList.item(0);
       child = body.firstChild;
@@ -688,7 +694,7 @@ exports.tests = {
       domConfig.setParameter("canonical-form", true);
       domConfig.setParameter("error-handler", errorMonitor.handleError);
       doc.normalizeDocument();
-      errorMonitor.assertLowerSeverity("normalizeError", 2);
+      errorMonitor.assertLowerSeverity(test, "normalizeError", 2);
       node = doc.firstChild;
 
       nodeType = node.nodeType;
@@ -804,7 +810,7 @@ exports.tests = {
       domConfig.setParameter("canonical-form", true);
       domConfig.setParameter("comments", false);
       doc.normalizeDocument();
-      errorMonitor.assertLowerSeverity("normalizeError", 2);
+      errorMonitor.assertLowerSeverity(test, "normalizeError", 2);
       node = doc.firstChild;
 
       nodeType = node.nodeType;
@@ -885,7 +891,7 @@ exports.tests = {
       domConfig.setParameter("error-handler", errorMonitor.handleError);
       domConfig.setParameter("canonical-form", true);
       doc.normalizeDocument();
-      errorMonitor.assertLowerSeverity("normalizeError", 2);
+      errorMonitor.assertLowerSeverity(test, "normalizeError", 2);
       divList = doc.getElementsByTagName("div");
       div = divList.item(5);
       node = div.getAttributeNode("xmlns");
@@ -930,7 +936,7 @@ exports.tests = {
       domConfig.setParameter("error-handler", errorMonitor.handleError);
       domConfig.setParameter("canonical-form", true);
       doc.normalizeDocument();
-      errorMonitor.assertLowerSeverity("normalizeError", 2);
+      errorMonitor.assertLowerSeverity(test, "normalizeError", 2);
       elemList = doc.getElementsByTagName("acronym");
       elem = elemList.item(0);
       attr = elem.getAttributeNode("title");
@@ -976,7 +982,7 @@ exports.tests = {
       domConfig.setParameter("canonical-form", true);
       domConfig.setParameter("error-handler", errorMonitor.handleError);
       doc.normalizeDocument();
-      errorMonitor.assertLowerSeverity("normalizeError", 2);
+      errorMonitor.assertLowerSeverity(test, "normalizeError", 2);
       doctype = doc.doctype;
 
       test.equal(doctype, null, 'docTypeNull');
@@ -1020,7 +1026,7 @@ exports.tests = {
     domConfig.setParameter("cdata-sections", false);
     domConfig.setParameter("error-handler", errorMonitor.handleError);
     doc.normalize();
-    errorMonitor.assertLowerSeverity("normalizationError", 2);
+    errorMonitor.assertLowerSeverity(test, "normalizationError", 2);
     pList = doc.getElementsByTagName("p");
     elem = pList.item(0);
     cdata = elem.lastChild;
@@ -1065,7 +1071,7 @@ exports.tests = {
     text = doc.createTextNode("suçon");
     retval = pElem.appendChild(text);
     doc.normalizeDocument();
-    errorMonitor.assertLowerSeverity("normalizeError", 2);
+    errorMonitor.assertLowerSeverity(test, "normalizeError", 2);
     pList = doc.getElementsByTagName("p");
     pElem = pList.item(0);
     text = pElem.firstChild;
@@ -1192,7 +1198,7 @@ exports.tests = {
       text = doc.createTextNode("suçon");
       retval = pElem.appendChild(text);
       doc.normalize();
-      errorMonitor.assertLowerSeverity("normalizeError", 2);
+      errorMonitor.assertLowerSeverity(test, "normalizeError", 2);
       pList = doc.getElementsByTagName("p");
       pElem = pList.item(0);
       text = pElem.firstChild;
@@ -1238,7 +1244,7 @@ exports.tests = {
     domConfig.setParameter("comments", false);
     domConfig.setParameter("error-handler", errorMonitor.handleError);
     doc.normalize();
-    errorMonitor.assertLowerSeverity("normalizationError", 2);
+    errorMonitor.assertLowerSeverity(test, "normalizationError", 2);
     pList = doc.getElementsByTagName("p");
     elem = pList.item(0);
     lastChild = elem.lastChild;
@@ -1290,7 +1296,7 @@ exports.tests = {
       domConfig.setParameter("schema-type", xsdNS);
       domConfig.setParameter("error-handler", errorMonitor.handleError);
       doc.normalizeDocument();
-      errorMonitor.assertLowerSeverity("normalizeError", 2);
+      errorMonitor.assertLowerSeverity(test, "normalizeError", 2);
       elemList = doc.getElementsByTagNameNS("http://www.w3.org/2001/DOM-Test-Suite/Level-3/datatype_normalization","double");
       element = elemList.item(0);
       str = element.getAttribute("value");
@@ -1362,7 +1368,7 @@ exports.tests = {
       domConfig.setParameter("schema-type", xsdNS);
       domConfig.setParameter("error-handler", errorMonitor.handleError);
       doc.normalizeDocument();
-      errorMonitor.assertLowerSeverity("normalizeError", 2);
+      errorMonitor.assertLowerSeverity(test, "normalizeError", 2);
       elemList = doc.getElementsByTagNameNS("http://www.w3.org/2001/DOM-Test-Suite/Level-3/datatype_normalization","decimal");
       element = elemList.item(0);
       str = element.getAttribute("value");
@@ -1426,7 +1432,7 @@ exports.tests = {
       domConfig.setParameter("schema-type", xsdNS);
       domConfig.setParameter("error-handler", errorMonitor.handleError);
       doc.normalizeDocument();
-      errorMonitor.assertLowerSeverity("normalizeError", 2);
+      errorMonitor.assertLowerSeverity(test, "normalizeError", 2);
       elemList = doc.getElementsByTagNameNS("http://www.w3.org/2001/DOM-Test-Suite/Level-3/datatype_normalization","boolean");
       element = elemList.item(0);
       str = element.getAttribute("value");
@@ -1490,7 +1496,7 @@ exports.tests = {
       domConfig.setParameter("schema-type", xsdNS);
       domConfig.setParameter("error-handler", errorMonitor.handleError);
       doc.normalizeDocument();
-      errorMonitor.assertLowerSeverity("normalizeError", 2);
+      errorMonitor.assertLowerSeverity(test, "normalizeError", 2);
       elemList = doc.getElementsByTagNameNS("http://www.w3.org/2001/DOM-Test-Suite/Level-3/datatype_normalization","float");
       element = elemList.item(0);
       str = element.getAttribute("value");
@@ -1562,7 +1568,7 @@ exports.tests = {
       domConfig.setParameter("schema-type", xsdNS);
       domConfig.setParameter("error-handler", errorMonitor.handleError);
       doc.normalizeDocument();
-      errorMonitor.assertLowerSeverity("normalizeError", 2);
+      errorMonitor.assertLowerSeverity(test, "normalizeError", 2);
       elemList = doc.getElementsByTagNameNS("http://www.w3.org/2001/DOM-Test-Suite/Level-3/datatype_normalization","dateTime");
       element = elemList.item(0);
       str = element.getAttribute("value");
@@ -1634,7 +1640,7 @@ exports.tests = {
       domConfig.setParameter("schema-type", xsdNS);
       domConfig.setParameter("error-handler", errorMonitor.handleError);
       doc.normalizeDocument();
-      errorMonitor.assertLowerSeverity("normalizeError", 2);
+      errorMonitor.assertLowerSeverity(test, "normalizeError", 2);
       elemList = doc.getElementsByTagNameNS("http://www.w3.org/2001/DOM-Test-Suite/Level-3/datatype_normalization","time");
       element = elemList.item(0);
       str = element.getAttribute("value");
@@ -1705,7 +1711,7 @@ exports.tests = {
       domConfig.setParameter("schema-type", xsdNS);
       domConfig.setParameter("error-handler", errorMonitor.handleError);
       doc.normalizeDocument();
-      errorMonitor.assertLowerSeverity("normalizeError", 2);
+      errorMonitor.assertLowerSeverity(test, "normalizeError", 2);
       elemList = doc.getElementsByTagNameNS("http://www.w3.org/2001/DOM-Test-Suite/Level-3/datatype_normalization","double");
       element = elemList.item(0);
       str = element.getAttribute("default");
@@ -1755,7 +1761,7 @@ exports.tests = {
       domConfig.setParameter("schema-type", xsdNS);
       domConfig.setParameter("error-handler", errorMonitor.handleError);
       doc.normalizeDocument();
-      errorMonitor.assertLowerSeverity("normalizeError", 2);
+      errorMonitor.assertLowerSeverity(test, "normalizeError", 2);
       elemList = doc.getElementsByTagNameNS("http://www.w3.org/2001/DOM-Test-Suite/Level-3/datatype_normalization","decimal");
       element = elemList.item(0);
       str = element.getAttribute("default");
@@ -1805,7 +1811,7 @@ exports.tests = {
       domConfig.setParameter("schema-type", xsdNS);
       domConfig.setParameter("error-handler", errorMonitor.handleError);
       doc.normalizeDocument();
-      errorMonitor.assertLowerSeverity("normalizeError", 2);
+      errorMonitor.assertLowerSeverity(test, "normalizeError", 2);
       elemList = doc.getElementsByTagNameNS("http://www.w3.org/2001/DOM-Test-Suite/Level-3/datatype_normalization","boolean");
       element = elemList.item(0);
       str = element.getAttribute("default");
@@ -1855,7 +1861,7 @@ exports.tests = {
       domConfig.setParameter("schema-type", xsdNS);
       domConfig.setParameter("error-handler", errorMonitor.handleError);
       doc.normalizeDocument();
-      errorMonitor.assertLowerSeverity("normalizeError", 2);
+      errorMonitor.assertLowerSeverity(test, "normalizeError", 2);
       elemList = doc.getElementsByTagNameNS("http://www.w3.org/2001/DOM-Test-Suite/Level-3/datatype_normalization","float");
       element = elemList.item(0);
       str = element.getAttribute("default");
@@ -1905,7 +1911,7 @@ exports.tests = {
       domConfig.setParameter("schema-type", xsdNS);
       domConfig.setParameter("error-handler", errorMonitor.handleError);
       doc.normalizeDocument();
-      errorMonitor.assertLowerSeverity("normalizeError", 2);
+      errorMonitor.assertLowerSeverity(test, "normalizeError", 2);
       elemList = doc.getElementsByTagNameNS("http://www.w3.org/2001/DOM-Test-Suite/Level-3/datatype_normalization","dateTime");
       element = elemList.item(0);
       str = element.getAttribute("default");
@@ -1955,7 +1961,7 @@ exports.tests = {
       domConfig.setParameter("schema-type", xsdNS);
       domConfig.setParameter("error-handler", errorMonitor.handleError);
       doc.normalizeDocument();
-      errorMonitor.assertLowerSeverity("normalizeError", 2);
+      errorMonitor.assertLowerSeverity(test, "normalizeError", 2);
       elemList = doc.getElementsByTagNameNS("http://www.w3.org/2001/DOM-Test-Suite/Level-3/datatype_normalization","time");
       element = elemList.item(0);
       str = element.getAttribute("default");
@@ -2009,7 +2015,7 @@ exports.tests = {
       domConfig.setParameter("schema-type", xsdNS);
       domConfig.setParameter("error-handler", errorMonitor.handleError);
       doc.normalizeDocument();
-      errorMonitor.assertLowerSeverity("normalizeError", 2);
+      errorMonitor.assertLowerSeverity(test, "normalizeError", 2);
       elemList = doc.getElementsByTagNameNS("http://www.w3.org/1999/xhtml","em");
       element = elemList.item(0);
       childNode = element.firstChild;
@@ -2066,7 +2072,7 @@ exports.tests = {
       domConfig.setParameter("schema-type", xsdNS);
       domConfig.setParameter("error-handler", errorMonitor.handleError);
       doc.normalizeDocument();
-      errorMonitor.assertLowerSeverity("normalizeError", 2);
+      errorMonitor.assertLowerSeverity(test, "normalizeError", 2);
       elemList = doc.getElementsByTagNameNS("http://www.w3.org/1999/xhtml","acronym");
       element = elemList.item(0);
       childNode = element.firstChild;
@@ -2123,7 +2129,7 @@ exports.tests = {
       domConfig.setParameter("schema-type", xsdNS);
       domConfig.setParameter("error-handler", errorMonitor.handleError);
       doc.normalizeDocument();
-      errorMonitor.assertLowerSeverity("normalizeError", 2);
+      errorMonitor.assertLowerSeverity(test, "normalizeError", 2);
       elemList = doc.getElementsByTagNameNS("http://www.w3.org/1999/xhtml","code");
       element = elemList.item(0);
       childNode = element.firstChild;
@@ -2191,7 +2197,7 @@ exports.tests = {
       domConfig.setParameter("schema-type", xsdNS);
       domConfig.setParameter("error-handler", errorMonitor.handleError);
       doc.normalizeDocument();
-      errorMonitor.assertLowerSeverity("normalizeError", 2);
+      errorMonitor.assertLowerSeverity(test, "normalizeError", 2);
       elemList = doc.getElementsByTagNameNS("http://www.w3.org/1999/xhtml","sup");
       element = elemList.item(0);
       childNode = element.firstChild;
@@ -2263,7 +2269,7 @@ exports.tests = {
       domConfig.setParameter("schema-type", xsdNS);
       domConfig.setParameter("error-handler", errorMonitor.handleError);
       doc.normalizeDocument();
-      errorMonitor.assertLowerSeverity("normalizeError", 2);
+      errorMonitor.assertLowerSeverity(test, "normalizeError", 2);
       elemList = doc.getElementsByTagNameNS("http://www.w3.org/1999/xhtml","code");
       element = elemList.item(1);
       childNode = element.firstChild;
@@ -2331,7 +2337,7 @@ exports.tests = {
       domConfig.setParameter("schema-type", xsdNS);
       domConfig.setParameter("error-handler", errorMonitor.handleError);
       doc.normalize();
-      errorMonitor.assertLowerSeverity("normalizeError", 2);
+      errorMonitor.assertLowerSeverity(test, "normalizeError", 2);
       elemList = doc.getElementsByTagNameNS("http://www.w3.org/1999/xhtml","code");
       element = elemList.item(1);
       childNode = element.firstChild;
@@ -4866,7 +4872,7 @@ exports.tests = {
 
     domConfig.setParameter("error-handler", errorMonitor.handleError);
     doc.normalizeDocument();
-    errorMonitor.assertLowerSeverity("normalizeError", 2);
+    errorMonitor.assertLowerSeverity(test, "normalizeError", 2);
     docElem = doc.documentElement;
 
     docElemNodeName = docElem.nodeName;
@@ -4911,7 +4917,7 @@ exports.tests = {
     domConfig.setParameter("cdata-sections", true);
     domConfig.setParameter("error-handler", errorMonitor.handleError);
     doc.normalizeDocument();
-    errorMonitor.assertLowerSeverity("normalizationError", 2);
+    errorMonitor.assertLowerSeverity(test, "normalizationError", 2);
     elemList = doc.getElementsByTagName("strong");
     elemName = elemList.item(1);
     cdata = elemName.lastChild;
@@ -4921,7 +4927,7 @@ exports.tests = {
     test.equal(nodeName, "#cdata-section", 'documentnormalizedocument02_true');
     domConfig.setParameter("cdata-sections", false);
     doc.normalizeDocument();
-    errorMonitor.assertLowerSeverity("normalization2Error", 2);
+    errorMonitor.assertLowerSeverity(test, "normalization2Error", 2);
     elemList = doc.getElementsByTagName("strong");
     elemName = elemList.item(1);
     text = elemName.lastChild;
@@ -4970,7 +4976,7 @@ exports.tests = {
     domConfig.setParameter("cdata-sections", true);
     domConfig.setParameter("error-handler", errorMonitor.handleError);
     doc.normalizeDocument();
-    errorMonitor.assertLowerSeverity("normalizationError", 2);
+    errorMonitor.assertLowerSeverity(test, "normalizationError", 2);
     pList = doc.getElementsByTagName("p");
     elem = pList.item(0);
     cdata = elem.lastChild;
@@ -4980,7 +4986,7 @@ exports.tests = {
     test.equal(nodeName, "#cdata-section", 'documentnormalizedocument03_true');
     domConfig.setParameter("cdata-sections", false);
     doc.normalizeDocument();
-    errorMonitor.assertLowerSeverity("normalization2Error", 2);
+    errorMonitor.assertLowerSeverity(test, "normalization2Error", 2);
     pList = doc.getElementsByTagName("p");
     elem = pList.item(0);
     text = elem.lastChild;
@@ -5029,7 +5035,7 @@ exports.tests = {
     domConfig.setParameter("comments", true);
     domConfig.setParameter("error-handler", errorMonitor.handleError);
     doc.normalizeDocument();
-    errorMonitor.assertLowerSeverity("normalizationError", 2);
+    errorMonitor.assertLowerSeverity(test, "normalizationError", 2);
     pList = doc.getElementsByTagName("p");
     elem = pList.item(0);
     lastChild = elem.lastChild;
@@ -5039,7 +5045,7 @@ exports.tests = {
     test.equal(nodeName, "#comment", 'documentnormalizedocument04_true');
     domConfig.setParameter("comments", false);
     doc.normalizeDocument();
-    errorMonitor.assertLowerSeverity("normalization2Error", 2);
+    errorMonitor.assertLowerSeverity(test, "normalization2Error", 2);
     pList = doc.getElementsByTagName("p");
     elem = pList.item(0);
     lastChild = elem.lastChild;
@@ -5100,6 +5106,7 @@ exports.tests = {
     domConfig.setParameter("error-handler", errorMonitor.handleError);
     doc.normalizeDocument();
     errors = errorMonitor.allErrors;
+console.log(errors);
     for(var indexN100B6 = 0;indexN100B6 < errors.length; indexN100B6++) {
       error = errors[indexN100B6];
       severity = error.severity;
@@ -9392,7 +9399,7 @@ exports.tests = {
 
     }
     doc.normalizeDocument();
-    errorMonitor.assertLowerSeverity("normalizeError", 2);
+    errorMonitor.assertLowerSeverity(test, "normalizeError", 2);
     bodyList = doc.getElementsByTagName("body");
     body = bodyList.item(0);
     child = body.firstChild;
@@ -9448,7 +9455,7 @@ exports.tests = {
       domConfig.setParameter("validate", true);
       domConfig.setParameter("error-handler", errorMonitor.handleError);
       doc.normalizeDocument();
-      errorMonitor.assertLowerSeverity("normalizeError", 2);
+      errorMonitor.assertLowerSeverity(test, "normalizeError", 2);
       bodyList = doc.getElementsByTagName("body");
       body = bodyList.item(0);
       child = body.firstChild;
@@ -9512,7 +9519,7 @@ exports.tests = {
       domConfig.setParameter("element-content-whitespace", false);
       domConfig.setParameter("error-handler", errorMonitor.handleError);
       doc.normalize();
-      errorMonitor.assertLowerSeverity("normalizeError", 2);
+      errorMonitor.assertLowerSeverity(test, "normalizeError", 2);
       bodyList = doc.getElementsByTagName("body");
       body = bodyList.item(0);
       child = body.firstChild;
@@ -11393,7 +11400,7 @@ exports.tests = {
     entRef = doc.createEntityReference("ent1");
     child = pElem.appendChild(entRef);
     doc.normalizeDocument();
-    errorMonitor.assertLowerSeverity("normalizeError", 2);
+    errorMonitor.assertLowerSeverity(test, "normalizeError", 2);
     pList = doc.getElementsByTagName("p");
     pElem = pList.item(0);
     child = pElem.lastChild;
@@ -11449,7 +11456,7 @@ exports.tests = {
     entRef = doc.createEntityReference("ent1");
     child = pElem.appendChild(entRef);
     doc.normalizeDocument();
-    errorMonitor.assertLowerSeverity("normalizeError", 2);
+    errorMonitor.assertLowerSeverity(test, "normalizeError", 2);
     pList = doc.getElementsByTagName("p");
     pElem = pList.item(0);
     child = pElem.lastChild;
@@ -11505,7 +11512,7 @@ exports.tests = {
     entRef = doc.createEntityReference("ent3");
     child = pElem.appendChild(entRef);
     doc.normalizeDocument();
-    errorMonitor.assertLowerSeverity("normalizeError", 2);
+    errorMonitor.assertLowerSeverity(test, "normalizeError", 2);
     pList = doc.getElementsByTagName("p");
     pElem = pList.item(0);
     child = pElem.lastChild;
@@ -11556,7 +11563,7 @@ exports.tests = {
     entRef = doc.createEntityReference("ent1");
     child = pElem.appendChild(entRef);
     doc.normalize();
-    errorMonitor.assertLowerSeverity("normalizeError", 2);
+    errorMonitor.assertLowerSeverity(test, "normalizeError", 2);
     pList = doc.getElementsByTagName("p");
     pElem = pList.item(0);
     child = pElem.lastChild;
@@ -12187,7 +12194,7 @@ exports.tests = {
     entRef = doc.createEntityReference("ent1");
     child = pElem.appendChild(entRef);
     doc.normalizeDocument();
-    errorMonitor.assertLowerSeverity("normalizeError", 2);
+    errorMonitor.assertLowerSeverity(test, "normalizeError", 2);
     pList = doc.getElementsByTagName("p");
     pElem = pList.item(0);
     child = pElem.lastChild;
@@ -12243,7 +12250,7 @@ exports.tests = {
     entRef = doc.createEntityReference("ent3");
     child = pElem.appendChild(entRef);
     doc.normalizeDocument();
-    errorMonitor.assertLowerSeverity("normalizeError", 2);
+    errorMonitor.assertLowerSeverity(test, "normalizeError", 2);
     pList = doc.getElementsByTagName("p");
     pElem = pList.item(0);
     child = pElem.lastChild;
@@ -12300,7 +12307,7 @@ exports.tests = {
       domConfig.setParameter("schema-type", xsdNS);
       domConfig.setParameter("error-handler", errorMonitor.handleError);
       doc.normalizeDocument();
-      errorMonitor.assertLowerSeverity("normalizeError", 2);
+      errorMonitor.assertLowerSeverity(test, "normalizeError", 2);
       elemList = doc.getElementsByTagNameNS("http://www.w3.org/1999/xhtml","code");
       element = elemList.item(0);
       childNode = element.firstChild;
@@ -12363,7 +12370,7 @@ exports.tests = {
     domConfig.setParameter("infoset", true);
     domConfig.setParameter("error-handler", errorMonitor.handleError);
     doc.normalizeDocument();
-    errorMonitor.assertLowerSeverity("normalization2Error", 2);
+    errorMonitor.assertLowerSeverity(test, "normalization2Error", 2);
     pList = doc.getElementsByTagName("p");
     elem = pList.item(0);
     text = elem.lastChild;
@@ -12402,7 +12409,7 @@ exports.tests = {
     domConfig.setParameter("infoset", true);
     domConfig.setParameter("error-handler", errorMonitor.handleError);
     doc.normalizeDocument();
-    errorMonitor.assertLowerSeverity("normalizeError", 2);
+    errorMonitor.assertLowerSeverity(test, "normalizeError", 2);
     docElem = doc.documentElement;
 
     xmlnsAttr = docElem.getAttributeNode("xmlns");
@@ -12631,7 +12638,7 @@ exports.tests = {
 
     }
     doc.normalizeDocument();
-    errorMonitor.assertLowerSeverity("normalizeError", 2);
+    errorMonitor.assertLowerSeverity(test, "normalizeError", 2);
     bodyList = doc.getElementsByTagName("body");
     body = bodyList.item(0);
     child = body.firstChild;
@@ -12684,7 +12691,7 @@ exports.tests = {
     domConfig.setParameter("infoset", true);
     domConfig.setParameter("error-handler", errorMonitor.handleError);
     doc.normalizeDocument();
-    errorMonitor.assertLowerSeverity("normalizationError", 2);
+    errorMonitor.assertLowerSeverity(test, "normalizationError", 2);
     pList = doc.getElementsByTagName("p");
     elem = pList.item(0);
     lastChild = elem.lastChild;
@@ -12720,7 +12727,7 @@ exports.tests = {
     domConfig.setParameter("namespace-declarations", true);
     domConfig.setParameter("error-handler", errorMonitor.handleError);
     doc.normalizeDocument();
-    errorMonitor.assertLowerSeverity("normalizeError", 2);
+    errorMonitor.assertLowerSeverity(test, "normalizeError", 2);
     docElem = doc.documentElement;
 
     xmlnsAttr = docElem.getAttributeNode("xmlns");
@@ -12753,7 +12760,7 @@ exports.tests = {
     domConfig.setParameter("namespace-declarations", false);
     domConfig.setParameter("error-handler", errorMonitor.handleError);
     doc.normalizeDocument();
-    errorMonitor.assertLowerSeverity("normalizeError", 2);
+    errorMonitor.assertLowerSeverity(test, "normalizeError", 2);
     docElem = doc.documentElement;
 
     xmlnsAttr = docElem.getAttributeNode("xmlns");
@@ -24790,7 +24797,7 @@ exports.tests = {
     text = doc.createTextNode("suçon");
     retval = pElem.appendChild(text);
     doc.normalizeDocument();
-    errorMonitor.assertLowerSeverity("normalizeError", 2);
+    errorMonitor.assertLowerSeverity(test, "normalizeError", 2);
     pList = doc.getElementsByTagName("p");
     pElem = pList.item(0);
     text = pElem.firstChild;
@@ -24841,7 +24848,7 @@ exports.tests = {
       text = doc.createTextNode("suçon");
       retval = pElem.appendChild(text);
       doc.normalizeDocument();
-      errorMonitor.assertLowerSeverity("normalizeError", 2);
+      errorMonitor.assertLowerSeverity(test, "normalizeError", 2);
       pList = doc.getElementsByTagName("p");
       pElem = pList.item(0);
       text = pElem.firstChild;
@@ -24888,7 +24895,7 @@ exports.tests = {
     text = doc.createTextNode("suçon");
     retval = pElem.appendChild(text);
     pElem.normalize();
-    errorMonitor.assertLowerSeverity("normalizeError", 2);
+    errorMonitor.assertLowerSeverity(test, "normalizeError", 2);
     pList = doc.getElementsByTagName("p");
     pElem = pList.item(0);
     text = pElem.firstChild;
@@ -24939,7 +24946,7 @@ exports.tests = {
       text = doc.createTextNode("suçon");
       retval = pElem.appendChild(text);
       pElem.normalize();
-      errorMonitor.assertLowerSeverity("normalizeError", 2);
+      errorMonitor.assertLowerSeverity(test, "normalizeError", 2);
       pList = doc.getElementsByTagName("p");
       pElem = pList.item(0);
       text = pElem.firstChild;
@@ -24986,7 +24993,7 @@ exports.tests = {
     text = doc.createTextNode("suçon");
     retval = pElem.appendChild(text);
     doc.normalize();
-    errorMonitor.assertLowerSeverity("normalizeError", 2);
+    errorMonitor.assertLowerSeverity(test, "normalizeError", 2);
     pList = doc.getElementsByTagName("p");
     pElem = pList.item(0);
     text = pElem.firstChild;
@@ -25037,7 +25044,7 @@ exports.tests = {
       text = doc.createTextNode("suçon");
       retval = pElem.appendChild(text);
       doc.normalize();
-      errorMonitor.assertLowerSeverity("normalizeError", 2);
+      errorMonitor.assertLowerSeverity(test, "normalizeError", 2);
       pList = doc.getElementsByTagName("p");
       pElem = pList.item(0);
       text = pElem.firstChild;
@@ -25084,7 +25091,7 @@ exports.tests = {
     text = doc.createTextNode("suçon");
     retval = pElem.appendChild(text);
     retval.normalize();
-    errorMonitor.assertLowerSeverity("normalizeError", 2);
+    errorMonitor.assertLowerSeverity(test, "normalizeError", 2);
     pList = doc.getElementsByTagName("p");
     pElem = pList.item(0);
     text = pElem.lastChild;
@@ -25135,7 +25142,7 @@ exports.tests = {
       text = doc.createTextNode("suçon");
       retval = pElem.appendChild(text);
       retval.normalize();
-      errorMonitor.assertLowerSeverity("normalizeError", 2);
+      errorMonitor.assertLowerSeverity(test, "normalizeError", 2);
       pList = doc.getElementsByTagName("p");
       pElem = pList.item(0);
       text = pElem.lastChild;
@@ -25184,7 +25191,7 @@ exports.tests = {
     domConfig.setParameter("split-cdata-sections", false);
     domConfig.setParameter("error-handler", errorMonitor.handleError);
     doc.normalize();
-    errorMonitor.assertLowerSeverity("noErrors", 2);
+    errorMonitor.assertLowerSeverity(test, "noErrors", 2);
 
     test.done()
   },
@@ -25361,7 +25368,7 @@ exports.tests = {
       nonBlankNode = doc.createTextNode("not blank");
       returnedNode = bodyElem.insertBefore(nonBlankNode,refChild);
       doc.normalizeDocument();
-      errorMonitor.assertLowerSeverity("noErrors", 2);
+      errorMonitor.assertLowerSeverity(test, "noErrors", 2);
       bodyList = doc.getElementsByTagName("body");
       bodyElem = bodyList.item(0);
       textNode = bodyElem.firstChild;
@@ -25417,7 +25424,7 @@ exports.tests = {
       blankNode = doc.createTextNode("     ");
       replacedNode = bodyElem.insertBefore(blankNode,refChild);
       doc.normalizeDocument();
-      errorMonitor.assertLowerSeverity("noErrors", 2);
+      errorMonitor.assertLowerSeverity(test, "noErrors", 2);
       bodyList = doc.getElementsByTagName("body");
       bodyElem = bodyList.item(0);
       textNode = bodyElem.firstChild;
