@@ -3,7 +3,7 @@ var dom = require('../../../../lib/jsdom/level3/core').dom.level3.core;
 module.exports.barfoo_standalone_no = function() {
 
   var doc = new dom.Document("xhtml");
-  doc.inputEncoding = doc.xmlEncoding = 'UTF-8';
+  doc._inputEncoding = doc._xmlEncoding = 'UTF-8';
 
   /*
   <!ELEMENT html (head, body)>
