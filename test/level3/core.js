@@ -10,6 +10,7 @@ var canonicalform03 = require("./core/files/canonicalform03.xml");
 var datatype_normalization = require("./core/files/datatype_normalization.xml");
 var datatype_normalization2 = require("./core/files/datatype_normalization2.xml");
 var external_barfoo = require("./core/files/external_barfoo.xml");
+var typeinfo_xml = require("./core/files/typeinfo.xml");
 var hc_nodtdstaff = require("./core/files/hc_nodtdstaff.xml");
 var hc_staff = require("./core/files/hc_staff.xml");
 var typeinfo = require("./core/files/typeinfo.xml");
@@ -27521,7 +27522,7 @@ exports.tests = {
     var typeInfo;
     var isDerived;
 
-    doc = typeinfo.typeinfo();
+    doc = typeinfo_xml.typeinfo();
     elemList = doc.getElementsByTagName("acronym");
     elem = elemList.item(0);
     typeInfo = elem.schemaTypeInfo;
@@ -27549,7 +27550,7 @@ exports.tests = {
     var typeInfo;
     var isDerived;
 
-    doc = typeinfo.typeinfo();
+    doc = typeinfo_xml.typeinfo();
     elemList = doc.getElementsByTagName("acronym");
     elem = elemList.item(0);
     typeInfo = elem.schemaTypeInfo;
@@ -27577,7 +27578,7 @@ exports.tests = {
     var typeInfo;
     var isDerived;
 
-    doc = typeinfo.typeinfo();
+    doc = typeinfo_xml.typeinfo();
     elemList = doc.getElementsByTagName("acronym");
     elem = elemList.item(0);
     typeInfo = elem.schemaTypeInfo;
@@ -27605,7 +27606,7 @@ exports.tests = {
     var typeInfo;
     var isDerived;
 
-    doc = typeinfo.typeinfo();
+    doc = typeinfo_xml.typeinfo();
     elemList = doc.getElementsByTagName("acronym");
     elem = elemList.item(0);
     typeInfo = elem.schemaTypeInfo;
@@ -27633,7 +27634,7 @@ exports.tests = {
     var typeInfo;
     var isDerived;
 
-    doc = typeinfo.typeinfo();
+    doc = typeinfo_xml.typeinfo();
     elemList = doc.getElementsByTagName("acronym");
     elem = elemList.item(0);
     typeInfo = elem.schemaTypeInfo;
@@ -27661,7 +27662,7 @@ exports.tests = {
     var typeInfo;
     var isDerived;
 
-    doc = typeinfo.typeinfo();
+    doc = typeinfo_xml.typeinfo();
     elemList = doc.getElementsByTagName("acronym");
     elem = elemList.item(0);
     typeInfo = elem.schemaTypeInfo;
@@ -27689,7 +27690,7 @@ exports.tests = {
     var typeInfo;
     var isDerived;
 
-    doc = typeinfo.typeinfo();
+    doc = typeinfo_xml.typeinfo();
     elemList = doc.getElementsByTagName("acronym");
     elem = elemList.item(0);
     typeInfo = elem.schemaTypeInfo;
@@ -27717,7 +27718,7 @@ exports.tests = {
     var typeInfo;
     var isDerived;
 
-    doc = typeinfo.typeinfo();
+    doc = typeinfo_xml.typeinfo();
     elemList = doc.getElementsByTagName("acronym");
     elem = elemList.item(0);
     typeInfo = elem.schemaTypeInfo;
@@ -27745,7 +27746,7 @@ exports.tests = {
     var typeInfo;
     var isDerived;
 
-    doc = typeinfo.typeinfo();
+    doc = typeinfo_xml.typeinfo();
     elemList = doc.getElementsByTagName("acronym");
     elem = elemList.item(0);
     typeInfo = elem.schemaTypeInfo;
@@ -27774,7 +27775,7 @@ exports.tests = {
     var typeInfo;
     var isDerived;
 
-    doc = typeinfo.typeinfo();
+    doc = typeinfo_xml.typeinfo();
     elemList = doc.getElementsByTagName("code");
     codeElem = elemList.item(0);
     typeInfo = codeElem.schemaTypeInfo;
@@ -27806,7 +27807,7 @@ exports.tests = {
     var typeInfo;
     var isDerived;
 
-    doc = typeinfo.typeinfo();
+    doc = typeinfo_xml.typeinfo();
     elemList = doc.getElementsByTagName("code");
     codeElem = elemList.item(0);
     typeInfo = codeElem.schemaTypeInfo;
@@ -27834,7 +27835,7 @@ exports.tests = {
     var typeInfo;
     var isDerived;
 
-    doc = typeinfo.typeinfo();
+    doc = typeinfo_xml.typeinfo();
     elemList = doc.getElementsByTagName("strong");
     elem = elemList.item(0);
     typeInfo = elem.schemaTypeInfo;
@@ -27860,7 +27861,7 @@ exports.tests = {
     var typeInfo;
     var isDerived;
 
-    doc = typeinfo.typeinfo();
+    doc = typeinfo_xml.typeinfo();
     elemList = doc.getElementsByTagName("em");
     elem = elemList.item(0);
     typeInfo = elem.schemaTypeInfo;
@@ -27886,7 +27887,7 @@ exports.tests = {
     var typeInfo;
     var isDerived;
 
-    doc = typeinfo.typeinfo();
+    doc = typeinfo_xml.typeinfo();
     elemList = doc.getElementsByTagName("em");
     elem = elemList.item(0);
     typeInfo = elem.schemaTypeInfo;
