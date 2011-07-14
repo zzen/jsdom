@@ -4,6 +4,7 @@ var sys = require("sys"),
 exports.hc_staff = function() {
 
   var doc = new dom.Document("html");
+  doc._xmlVersion = '1.0';
   var implementation = new dom.DOMImplementation(doc, {
     "XML" : ["1.0", "2.0"],
     "core": ["1.0", "2.0", "3.0"]
