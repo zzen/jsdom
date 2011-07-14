@@ -30,7 +30,7 @@ exports.hc_staff = function() {
   // <!ATTLIST acronym dir CDATA "ltr">
 
   var defaultAttributes = new dom.NamedNodeMap(doc);
-  var acronym = doc.createElementNS("http://www.w3.org/2000/xmlns/","acronym");
+  var acronym = doc.createElementNS("http://www.w3.org/2000/xmlns/","p");
   acronym.setAttribute("dir", "ltr");
   defaultAttributes.setNamedItem(acronym);
 
