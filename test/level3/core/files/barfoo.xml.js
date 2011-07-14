@@ -3,8 +3,6 @@ var dom = require('../../../../lib/jsdom/level3/core').dom.level3.core;
 
 module.exports.barfoo =  function() {
 
-
-
   var doc = new dom.Document("html");
 
   /*
@@ -21,7 +19,7 @@ module.exports.barfoo =  function() {
 
 
   //<!ENTITY ent1 'foo'>
-  var ent1 = doc.createE
+  //var ent1 = doc.createEntityNode('ent1', 'foo');
 
   //<!ENTITY ent2 'foo<br/>'>
   var ent2Element = doc.createElement('ent2')
@@ -36,13 +34,25 @@ module.exports.barfoo =  function() {
   );*/
   var entities = new dom.EntityNodeMap();
 
+  /*
+   <!ATTLIST p
+      dir CDATA 'rtl'
+      xmlns:dmstc CDATA #IMPLIED
+      xmlns:nm CDATA #IMPLIED
+      xmlns:emp2 CDATA #IMPLIED>
+  */
+  var defaultsAttributes = new dom.NamedNodeMap(doc);
+  var defaultP = doc.createElement('p');
+  defaultP.setAttribute('dir', 'rtl');
+  defaultsAttributes.setNamedItem(defaultP);
+
   // <!DOCTYPE html [
   var docType = new dom.DocumentType(
     doc,
     'xml',
     entities,
     new dom.NotationNodeMap(doc),
-    new dom.NamedNodeMap(doc)
+    defaultsAttributes
   );
 
   doc.doctype = docType;
@@ -53,7 +63,7 @@ module.exports.barfoo =  function() {
   });
 
   // <html xmlns='http://www.w3.org/1999/xhtml'>
-  var html      = doc.createElementNS("http://www.w3.org/2000/xmlns/","html");
+  var html      = doc.createElementNS("http://www.w3.org/1999/xhtml","html");
 
   //<head>
   var head = doc.createElement('head');
