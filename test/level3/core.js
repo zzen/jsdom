@@ -4280,11 +4280,7 @@ exports.tests = {
    */
   documentgetdocumenturi01: function (test) {
     var doc = hc_staff.hc_staff();
-    // this test passes with mjsunit due to a technicality:
-    // assertNotNull uses '!==' but test.notEqual uses '!='
-    // (undefined !== null) is true
-    // (undefined != null) is false
-    test.notEqual(doc.documentURI, null, 'documentgetdocumenturi01');
+    test.ok(doc.documentURI !== null, 'documentgetdocumenturi01');
     test.done()
   },
 
