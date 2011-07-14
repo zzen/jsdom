@@ -130,6 +130,7 @@ Pending schemaInfo implementation
   ids[0].appendChild(doc.createTextNode("EMP0001"));
   salaries[0].appendChild(doc.createTextNode("56,000"));
   addresses[0].setAttribute("title", "Yes");
+  addresses[0].setAttributeNS("http://www.w3.org/2001/XMLSchema-instance", "xsi:noNamespaceSchemaLocation", "Yes");
   addresses[0].appendChild(doc.createTextNode('1230 North Ave. Dallas, Texas 98551'));
   names[0].appendChild(doc.createTextNode("Margaret Martin"));
   genders[0].appendChild(doc.createTextNode("Female"));
