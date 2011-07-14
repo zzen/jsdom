@@ -32,7 +32,7 @@ var dom = require("../../../../lib/jsdom/level1/core").dom.level1.core;
 
 exports.hc_staff = function() {
 
-  var doc = new dom.Document("html");
+  var doc = new dom.Document("xml");
   var implementation = new dom.DOMImplementation(doc, {
     "XML" : "1.0"
   });
