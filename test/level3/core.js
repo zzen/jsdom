@@ -1,5 +1,6 @@
 var barfoo = require("./core/files/barfoo.xml");
-// var barfoo_base = require("./core/files/barfoo_base.xml");
+var barfoo_base = require("./core/files/barfoo_base.xml");
+var external_barfoo = require("./core/files/external_barfoo.xml");
 var barfoo_nodefaultns = require("./core/files/barfoo_nodefaultns.xml");
 var barfoo_standalone_no = require("./core/files/barfoo_standalone_no.xml");
 var barfoo_standalone_yes = require("./core/files/barfoo_standalone_yes.xml");
