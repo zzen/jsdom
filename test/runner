@@ -7,6 +7,27 @@ var nodeunit = require('nodeunit'),
 
 require('console.log');
 
+var optimist = require('optimist')
+    .usage('Run the jsdom test suite')
+    .alias('s', 'suites')
+    .string('s')
+    .describe('s', 'suites that you want to run. ie: -s level1/core,1/html,html')
+    .alias('f', 'fail-fast')
+    .describe('f', 'stop on the first failed test')
+    .alias('h', 'help')
+    .describe('h', 'show the help')
+    .alias('t', 'tests')
+    .describe('t', 'choose the test cases to run. ie: -t jquery')
+    .alias('d', 'debug')
+    .describe('d', 'run in node\'s interactive debugger mode');
+
+var argv = optimist.argv;
+if (argv.help) {
+  optimist.showHelp();
+  process.exit();
+}
+
+
 var totalTests = 0;
 var failedTests = 0;
 var passedTests = 0;
@@ -15,8 +36,14 @@ var currentModule = "";
 var moduleIndex = 0;
 var start = new Date().getTime();
 var fileFilter = [];
-if (process.argv.length > 2) {
-  fileFilter = process.argv[2].split(',');
+var testFilter = [];
+
+if (argv.suites) {
+  fileFilter = argv.suites.replace(/\s/g, '').split(',');
+}
+
+if (argv.tests) {
+  testFilter = argv.tests.replace(/\s/g, '').split(',');
 }
 
 var assert = require('nodeunit/lib/assert');
@@ -24,19 +51,17 @@ require('nodeunit/lib/assert').equal = function equal(actual, expected, message)
   if (actual != expected) {
     if (actual && actual.nodeType) {
       actual = actual.toString();
-    }   
+    }
 
     if (expected && expected.nodeType) {
       expected = expected.toString();
-    }   
+    }
 
     assert.fail(actual, expected, message, '==', assert.equal);
   }
 };
 
-
-
-var files = [ 
+var files = [
   "level1/core.js",
   "level1/html.js",
   "level1/svg.js",
@@ -47,7 +72,7 @@ var files = [
   "level3/core.js",
   "level3/ls.js",
   "level3/xpath.js",
-  /*  
+  /*
    TODO: this needs work, will break everything if included.
    "window",*/
    "sizzle/index.js",
@@ -66,14 +91,35 @@ if (fileFilter.length > 0) {
   });
 }
 
+
+var modules = {};
+var modulesToRun = {};
+
 var paths = files.map(function (p) {
-  return path.join(__dirname, p);
+  var module = require(path.join(__dirname, p)).tests;
+  var filteredModule = {};
+
+  if (testFilter.length) {
+    var moduleKeys = Object.keys(module);
+    testFilter.forEach(function(filter) {
+      filter = filter.toLowerCase();
+      moduleKeys.forEach(function(moduleKey) {
+        if (moduleKey.toLowerCase().indexOf(filter) > -1) {
+          filteredModule[moduleKey] = module[moduleKey];
+        }
+      });
+    });
+    module = filteredModule;
+  }
+
+  if (Object.keys(module).length > 0) {
+    modulesToRun[p] = module;
+  }
 });
 
-
-nodeunit.runFiles(paths, {
+nodeunit.runModules(modulesToRun, {
   moduleStart: function (name) {
-    currentModule = files[moduleIndex].replace('.js', '');
+    currentModule = name.replace('.js', '');
     console.log("running", name, currentModule);
     modules[currentModule] = {
       total : 0,
@@ -85,7 +131,7 @@ nodeunit.runFiles(paths, {
   moduleDone: function (name, assertions) {
   },
   testStart: function () {
-    modules[currentModule].total++;   
+    modules[currentModule].total++;
   },
   testDone: function (name, assertions) {
     totalTests++;
@@ -100,17 +146,18 @@ nodeunit.runFiles(paths, {
       console.log('✖ ' + currentModule + '/' + name);
       assertions.forEach(function (a) {
         if (a.failed()) {
-          a = nodeunit.utils.betterErrors(a);
-          if (a.error instanceof AssertionError && a.message) {
-            console.log(
-                'Assertion Message: ' +
-                assertion_message(a.message)
-            );  
-          }   
+          if (a.error instanceof AssertionError) {
+            a = nodeunit.utils.betterErrors(a);
+            if (a.message) {
+                console.log(
+                    'Assertion Message: ' + assertion_message(a.message)
+                 );
+              }
+           }
           console.log(a.error.stack + '\n');
-        } 
+         }
       });
-      if (process.argv.length > 3) {
+      if (argv['fail-fast']) {
         process.exit();
       }
     }
@@ -138,7 +185,7 @@ nodeunit.runFiles(paths, {
     }
 
     var pad = function(name, value, rightJustified) {
-      var ret = '';  
+      var ret = '';
       var padding = '';
 
       var amount = maxWidths[name] - value.length;
@@ -182,7 +229,12 @@ nodeunit.runFiles(paths, {
     });
     console.log(caps);
     var ratio = failedTests + '/' + totalTests;
-    var percent = Math.floor((passedTests/totalTests)*100) + '%';
+    var percent = 0;
+    if (totalTests === 0) {
+      percent = '100%';
+    } else {
+      percent = Math.floor((passedTests/totalTests)*100) + '%';
+    }
     console.log('TOTALS: %s failed; %s success', ratio, percent);
     console.log('TIME: %dms', duration);
   }
