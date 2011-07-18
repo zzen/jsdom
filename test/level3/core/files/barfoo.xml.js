@@ -1,9 +1,12 @@
 
 var dom = require('../../../../lib/jsdom/level3/core').dom.level3.core;
 
-module.exports.barfoo =  function() {
+module.exports.barfoo =  function () {
 
   var doc = new dom.Document("html");
+
+  doc._baseURI = 'file://' + __dirname;
+  doc.documentURI = doc._baseURI;
 
   /*
   <!ELEMENT html (head, body)>
@@ -19,20 +22,18 @@ module.exports.barfoo =  function() {
 
 
   //<!ENTITY ent1 'foo'>
-  //var ent1 = doc.createEntityNode('ent1', 'foo');
+  var ent1 = doc.createEntityNode('ent1', doc.createTextNode('foo'));
 
   //<!ENTITY ent2 'foo<br/>'>
-  var ent2Element = doc.createElement('ent2')
+  var ent2Element = doc.createElement('ent2');
   ent2Element.appendChild(doc.createTextNode("foo"));
   ent2Element.appendChild(doc.createElement('br'));
 
-/*  var ent2 =  doc.createEntityNode("ent2", ent2Element);
   var entities = new dom.EntityNodeMap(
     doc,
     ent1,
-    ent2
-  );*/
-  var entities = new dom.EntityNodeMap();
+    ent2Element
+  );
 
   /*
    <!ATTLIST p
@@ -63,23 +64,24 @@ module.exports.barfoo =  function() {
   });
 
   // <html xmlns='http://www.w3.org/1999/xhtml'>
-  var html      = doc.createElementNS("http://www.w3.org/1999/xhtml","html");
+  var xmlns = 'http://www.w3.org/1999/xhtml';
+  var html      = doc.createElementNS(xmlns,"html");
 
   //<head>
-  var head = doc.createElement('head');
+  var head = doc.createElementNS(xmlns, 'head');
   //<title>replaceWholeText sample</title>
-  var title = doc.createElement('title');
+  var title = doc.createElementNS(xmlns, 'title');
   title.appendChild(doc.createTextNode('replaceWholeText sample'))
   head.appendChild(title);
   //</head>
   html.appendChild(head);
 
   //<body onload="parent.loadComplete()">
-  var body = doc.createElement('body');
+  var body = doc.createElementNS(xmlns, 'body');
   body.setAttribute('onload', 'parent.loadComplete()');
 
   //<p>bar</p>
-  var p = doc.createElement('p');
+  var p = doc.createElementNS(xmlns, 'p');
   p.appendChild(doc.createTextNode('bar'));
   body.appendChild(p);
 

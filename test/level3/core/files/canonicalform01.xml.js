@@ -1,11 +1,17 @@
 var dom = require('../../../../lib/jsdom/level3/core').dom.level3.core;
 
 module.exports.canonicalform01 =  function() {
+  var doc = new dom.Document();
 
   // <?xml version="1.0"?>
-  // <?xml-stylesheet   href="doc.xsl" type="text/xsl" ?>
 
-  var doc = new dom.Document();
+  // <?xml-stylesheet   href="doc.xsl" type="text/xsl" ?>
+  // <?xml-stylesheet   href="doc.xsl"
+  //   type="text/xsl" ?>
+  var stylesheet = doc.createProcessingInstruction('xml-stylesheet', '   href="doc.xsl"\n  type="text/xsl  ');
+  doc.appendChild(stylesheet);
+  doc.appendChild(doc.createTextNode(' '));
+
   var entities = new dom.EntityNodeMap();
 
   // <!DOCTYPE html [
@@ -46,20 +52,24 @@ module.exports.canonicalform01 =  function() {
   p.appendChild(doc.createComment(' Comment 1 '));
   body.appendChild(p);
 
-  // <?pi-without-data     ?>
-  body.appendChild(doc.createProcessingInstruction('pi-without-data', ''));
-
-  // <!-- Comment 2 -->
-  body.appendChild(doc.createComment(' Comment 2 '));
-
-  // <!-- Comment 3 -->
-  body.appendChild(doc.createComment(' Comment 3 '));
-
   //</body>
   html.appendChild(body);
 
   //</html>
   doc.appendChild(html);
+  doc.appendChild(doc.createTextNode(' \n '));
+
+  // <?pi-without-data     ?>
+  doc.appendChild(doc.createProcessingInstruction('pi-without-data', ''));
+  doc.appendChild(doc.createTextNode(' \n '));
+
+  // <!-- Comment 2 -->
+  doc.appendChild(doc.createComment(' Comment 2 '))
+  doc.appendChild(doc.createTextNode(' \n '));
+
+  // <!-- Comment 3 -->
+  doc.appendChild(doc.createComment(' Comment 3 '))
+
 
   return doc;
 };
