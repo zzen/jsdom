@@ -102,8 +102,9 @@ if (fileFilter.length > 0) {
 var modules = {};
 var modulesToRun = {};
 
-var paths = files.map(function (p) {
-  var module = require(path.join(__dirname, p)).tests;
+files.map(function (p) {
+  var required = require(path.join(__dirname, p));
+  var module = required.tests || required;
   var filteredModule = {};
 
   if (testFilter.length) {
@@ -119,7 +120,7 @@ var paths = files.map(function (p) {
     module = filteredModule;
   }
 
-  if (Object.keys(module).length > 0) {
+  if (module && Object.keys(module).length > 0) {
     modulesToRun[p] = module;
   }
 });
