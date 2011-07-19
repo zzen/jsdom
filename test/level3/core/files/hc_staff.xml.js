@@ -20,6 +20,7 @@ exports.hc_staff = function() {
   var ent4 = doc.createEntityNode('ent4');
   var ent4_span = doc.createElement('span');
   ent4_span.setAttributeNS("http://www.w3.org/2000/xmlns/", 'xmlns', 'http://www.w3.org/1999/xhtml');
+  ent4_span.appendChild(doc.createTextNode('Element data'));
   var ent4_pi = doc.createProcessingInstruction('PItarget', 'PIdata');
 
   ent4._readonly = false;
@@ -32,9 +33,9 @@ exports.hc_staff = function() {
   var entities = new dom.EntityNodeMap(
     doc,
     doc.createEntityNode("alpha", doc.createTextNode("α")),
-    doc.createEntityNode("beta", doc.createTextNode("&#946;")),
+    doc.createEntityNode("beta", doc.createTextNode("β")),
     doc.createEntityNode("gamma", doc.createTextNode("&#947;")),
-    doc.createEntityNode("delta", doc.createTextNode("&#948;")),
+    doc.createEntityNode("delta", doc.createTextNode("δ")),
     doc.createEntityNode("epsilon", doc.createTextNode("&#949;")),
     ent4
   );
@@ -43,7 +44,7 @@ exports.hc_staff = function() {
 
   var defaultAttributes = new dom.NamedNodeMap(doc);
   var acronym = doc.createElementNS("http://www.w3.org/2000/xmlns/","p");
-  acronym.setAttribute("dir", "ltr");
+  acronym.setAttribute("dir", "rtl");
   defaultAttributes.setNamedItem(acronym);
 
 
@@ -116,19 +117,19 @@ Pending schemaInfo implementation
     var id       = doc.createElementNS("http://www.w3.org/2000/xmlns/","em");
     var salary   = doc.createElementNS("http://www.w3.org/2000/xmlns/","sup");
 
-    employee.appendChild(doc.createTextNode("\n"));
+    employee.appendChild(doc.createTextNode("\n  "));
     employee.appendChild(id);
-    employee.appendChild(doc.createTextNode("\n"));
+    employee.appendChild(doc.createTextNode("\n  "));
     employee.appendChild(name);
-    employee.appendChild(doc.createTextNode("\n"));
+    employee.appendChild(doc.createTextNode("\n  "));
     employee.appendChild(position);
-    employee.appendChild(doc.createTextNode("\n"));
+    employee.appendChild(doc.createTextNode("\n  "));
     employee.appendChild(salary);
-    employee.appendChild(doc.createTextNode("\n"));
+    employee.appendChild(doc.createTextNode("\n  "));
     employee.appendChild(gender);
-    employee.appendChild(doc.createTextNode("\n"));
+    employee.appendChild(doc.createTextNode("\n  "));
     employee.appendChild(address);
-    employee.appendChild(doc.createTextNode("\n"));
+    employee.appendChild(doc.createTextNode("\n "));
     staff.appendChild(employee);
 
     names.push(name);
@@ -158,8 +159,10 @@ Pending schemaInfo implementation
   addresses[1].appendChild(doc.createTextNode("β Dallas, γ\n 98554"));
   addresses[1].setAttributeNS("http://www.w3.org/2001/XMLSchema-instance", "xsi:noNamespaceSchemaLocation", "Yes");
   names[1].appendChild(doc.createTextNode("Martha Raynolds"));
-  names[1].appendChild(doc.createCDATASection("This is a CDATASection with EntityReference number 2 &amp;ent2;"));
-  names[1].appendChild(doc.createCDATASection("This is an adjacent CDATASection with a reference to a tab &amp;tab;"));
+  names[1].appendChild(doc.createTextNode('\n'));
+  names[1].appendChild(doc.createCDATASection("This is a CDATASection with EntityReference number 2 &ent2;"));
+  names[1].appendChild(doc.createTextNode('\n'));
+  names[1].appendChild(doc.createCDATASection("This is an adjacent CDATASection with a reference to a tab &tab;"));
   genders[1].appendChild(doc.createTextNode("Female"));
   positions[1].appendChild(doc.createTextNode("Secretary"));
 
@@ -170,8 +173,8 @@ Pending schemaInfo implementation
   addresses[2].setAttribute("class", "No");
   addresses[2].setAttributeNS("http://www.w3.org/2001/XMLSchema-instance", "xsi:noNamespaceSchemaLocation", "Yes");
   addresses[2].appendChild(doc.createTextNode("PO Box 27 Irving, texas 98553"));
-  names[2].appendChild(doc.createTextNode("Roger\n Jones")) ;
-  genders[2].appendChild(doc.createEntityReference("&ent4;"));//Text("&delta;"));
+  names[2].appendChild(doc.createTextNode("Roger\n Jones"));
+  genders[2].appendChild(doc.createEntityReference("ent4"));//Text("&delta;"));
   positions[2].appendChild(doc.createTextNode("Department Manager"));
 
   employees[3].setAttributeNS('http://www.w3.org/2000/xmlns/','xmlns:nm', "http://www.altavista.com")

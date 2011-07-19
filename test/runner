@@ -61,6 +61,13 @@ require('nodeunit/lib/assert').equal = function equal(actual, expected, message)
   }
 };
 
+assert.domSame = function(actual, expected, message) {
+  if(expected != actual) {
+    assert.equal(expected.nodeType, actual.nodeType);
+    assert.equal(expected.nodeValue, actual.nodeValue);
+  }
+};
+
 var files = [
   "level1/core.js",
   "level1/html.js",

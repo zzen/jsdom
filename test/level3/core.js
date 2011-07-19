@@ -14925,26 +14925,24 @@ exports.tests = {
 
     doc = barfoo.barfoo();
     domImpl = doc.implementation;
-    node =  doc;
+    node = doc;
     featureImpl = node.getFeature("Core",nullVersion);
-    test.equal(featureImpl, node, 'coreUnspecifiedVersion');
+    test.domSame(featureImpl, node, 'coreUnspecifiedVersion');
     featureImpl = node.getFeature("cOrE",nullVersion);
-    test.equal(featureImpl, node, 'cOrEUnspecifiedVersion');
+    test.domSame(featureImpl, node, 'cOrEUnspecifiedVersion');
     featureImpl = node.getFeature("+cOrE",nullVersion);
-    test.equal(featureImpl, node, 'PlusCoreUnspecifiedVersion');
+    test.domSame(featureImpl, node, 'PlusCoreUnspecifiedVersion');
     featureImpl = node.getFeature("org.w3c.domts.bogus.feature",nullVersion);
-    test.equal(featureImpl, null, 'unrecognizedFeature');
+    test.domSame(featureImpl, null, 'unrecognizedFeature');
     featureImpl = node.getFeature("cOrE","2.0");
-    test.equal(featureImpl, node, 'Core20');
+    test.domSame(featureImpl, node, 'Core20');
     featureImpl = node.getFeature("cOrE","3.0");
-    test.equal(featureImpl, node, 'Core30');
+    test.domSame(featureImpl, node, 'Core30');
     isSupported = node.isSupported("XML",nullVersion);
     featureImpl = doc.getFeature("XML",nullVersion);
 
-    if(
-      isSupported
-    ) {
-      test.equal(featureImpl, node, 'XMLUnspecified');
+    if(isSupported) {
+      test.domSame(featureImpl, node, 'XMLUnspecified');
 
     }
     isSupported = node.isSupported("SVG",nullVersion);
@@ -14953,7 +14951,7 @@ exports.tests = {
     if(
       isSupported
     ) {
-      test.equal(featureImpl, node, 'SVGUnspecified');
+      test.domSame(featureImpl, node, 'SVGUnspecified');
 
     }
     isSupported = node.isSupported("HTML",nullVersion);
@@ -14962,7 +14960,7 @@ exports.tests = {
     if(
       isSupported
     ) {
-      test.equal(featureImpl, node, 'HTMLUnspecified');
+      test.domSame(featureImpl, node, 'HTMLUnspecified');
 
     }
     isSupported = node.isSupported("Events",nullVersion);
@@ -14971,7 +14969,7 @@ exports.tests = {
     if(
       isSupported
     ) {
-      test.equal(featureImpl, node, 'EventsUnspecified');
+      test.domSame(featureImpl, node, 'EventsUnspecified');
 
     }
     isSupported = node.isSupported("LS",nullVersion);
@@ -14980,7 +14978,7 @@ exports.tests = {
     if(
       isSupported
     ) {
-      test.equal(featureImpl, node, 'LSUnspecified');
+      test.domSame(featureImpl, node, 'LSUnspecified');
 
     }
     isSupported = node.isSupported("LS-Async",nullVersion);
@@ -14989,7 +14987,7 @@ exports.tests = {
     if(
       isSupported
     ) {
-      test.equal(featureImpl, node, 'LSAsyncUnspecified');
+      test.domSame(featureImpl, node, 'LSAsyncUnspecified');
 
     }
     isSupported = node.isSupported("XPath",nullVersion);
@@ -14998,7 +14996,7 @@ exports.tests = {
     if(
       isSupported
     ) {
-      test.equal(featureImpl, node, 'XPathUnspecified');
+      test.domSame(featureImpl, node, 'XPathUnspecified');
 
     }
     isSupported = node.isSupported("+HTML",nullVersion);
@@ -15044,24 +15042,24 @@ exports.tests = {
     domImpl = doc.implementation;
     node = doc.createDocumentFragment();
     featureImpl = node.getFeature("Core",nullVersion);
-    test.equal(featureImpl, node, 'coreUnspecifiedVersion');
+    test.domSame(featureImpl, node, 'coreUnspecifiedVersion');
     featureImpl = node.getFeature("cOrE",nullVersion);
-    test.equal(featureImpl, node, 'cOrEUnspecifiedVersion');
+    test.domSame(featureImpl, node, 'cOrEUnspecifiedVersion');
     featureImpl = node.getFeature("+cOrE",nullVersion);
-    test.equal(featureImpl, node, 'PlusCoreUnspecifiedVersion');
+    test.domSame(featureImpl, node, 'PlusCoreUnspecifiedVersion');
     featureImpl = node.getFeature("org.w3c.domts.bogus.feature",nullVersion);
-    test.equal(featureImpl, null, 'unrecognizedFeature');
+    test.domSame(featureImpl, null, 'unrecognizedFeature');
     featureImpl = node.getFeature("cOrE","2.0");
-    test.equal(featureImpl, node, 'Core20');
+    test.domSame(featureImpl, node, 'Core20');
     featureImpl = node.getFeature("cOrE","3.0");
-    test.equal(featureImpl, node, 'Core30');
+    test.domSame(featureImpl, node, 'Core30');
     isSupported = node.isSupported("XML",nullVersion);
     featureImpl = node.getFeature("XML",nullVersion);
 
     if(
       isSupported
     ) {
-      test.equal(featureImpl, node, 'XMLUnspecified');
+      test.domSame(featureImpl, node, 'XMLUnspecified');
 
     }
     isSupported = node.isSupported("SVG",nullVersion);
@@ -15070,7 +15068,7 @@ exports.tests = {
     if(
       isSupported
     ) {
-      test.equal(featureImpl, node, 'SVGUnspecified');
+      test.domSame(featureImpl, node, 'SVGUnspecified');
 
     }
     isSupported = node.isSupported("HTML",nullVersion);
@@ -15079,7 +15077,7 @@ exports.tests = {
     if(
       isSupported
     ) {
-      test.equal(featureImpl, node, 'HTMLUnspecified');
+      test.domSame(featureImpl, node, 'HTMLUnspecified');
 
     }
     isSupported = node.isSupported("Events",nullVersion);
@@ -15088,7 +15086,7 @@ exports.tests = {
     if(
       isSupported
     ) {
-      test.equal(featureImpl, node, 'EventsUnspecified');
+      test.domSame(featureImpl, node, 'EventsUnspecified');
 
     }
     isSupported = node.isSupported("LS",nullVersion);
@@ -15097,7 +15095,7 @@ exports.tests = {
     if(
       isSupported
     ) {
-      test.equal(featureImpl, node, 'LSUnspecified');
+      test.domSame(featureImpl, node, 'LSUnspecified');
 
     }
     isSupported = node.isSupported("LS-Async",nullVersion);
@@ -15106,7 +15104,7 @@ exports.tests = {
     if(
       isSupported
     ) {
-      test.equal(featureImpl, node, 'LSAsyncUnspecified');
+      test.domSame(featureImpl, node, 'LSAsyncUnspecified');
 
     }
     isSupported = node.isSupported("XPath",nullVersion);
@@ -15115,7 +15113,7 @@ exports.tests = {
     if(
       isSupported
     ) {
-      test.equal(featureImpl, node, 'XPathUnspecified');
+      test.domSame(featureImpl, node, 'XPathUnspecified');
 
     }
     isSupported = node.isSupported("+HTML",nullVersion);
@@ -15162,24 +15160,24 @@ exports.tests = {
     node = doc.doctype;
 
     featureImpl = node.getFeature("Core",nullVersion);
-    test.equal(featureImpl, node, 'coreUnspecifiedVersion');
+    test.domSame(featureImpl, node, 'coreUnspecifiedVersion');
     featureImpl = node.getFeature("cOrE",nullVersion);
-    test.equal(featureImpl, node, 'cOrEUnspecifiedVersion');
+    test.domSame(featureImpl, node, 'cOrEUnspecifiedVersion');
     featureImpl = node.getFeature("+cOrE",nullVersion);
-    test.equal(featureImpl, node, 'PlusCoreUnspecifiedVersion');
+    test.domSame(featureImpl, node, 'PlusCoreUnspecifiedVersion');
     featureImpl = node.getFeature("org.w3c.domts.bogus.feature",nullVersion);
-    test.equal(featureImpl, null, 'unrecognizedFeature');
+    test.domSame(featureImpl, null, 'unrecognizedFeature');
     featureImpl = node.getFeature("cOrE","2.0");
-    test.equal(featureImpl, node, 'Core20');
+    test.domSame(featureImpl, node, 'Core20');
     featureImpl = node.getFeature("cOrE","3.0");
-    test.equal(featureImpl, node, 'Core30');
+    test.domSame(featureImpl, node, 'Core30');
     isSupported = node.isSupported("XML",nullVersion);
     featureImpl = node.getFeature("XML",nullVersion);
 
     if(
       isSupported
     ) {
-      test.equal(featureImpl, node, 'XMLUnspecified');
+      test.domSame(featureImpl, node, 'XMLUnspecified');
 
     }
     isSupported = node.isSupported("SVG",nullVersion);
@@ -15188,7 +15186,7 @@ exports.tests = {
     if(
       isSupported
     ) {
-      test.equal(featureImpl, node, 'SVGUnspecified');
+      test.domSame(featureImpl, node, 'SVGUnspecified');
 
     }
     isSupported = node.isSupported("HTML",nullVersion);
@@ -15197,7 +15195,7 @@ exports.tests = {
     if(
       isSupported
     ) {
-      test.equal(featureImpl, node, 'HTMLUnspecified');
+      test.domSame(featureImpl, node, 'HTMLUnspecified');
 
     }
     isSupported = node.isSupported("Events",nullVersion);
@@ -15206,7 +15204,7 @@ exports.tests = {
     if(
       isSupported
     ) {
-      test.equal(featureImpl, node, 'EventsUnspecified');
+      test.domSame(featureImpl, node, 'EventsUnspecified');
 
     }
     isSupported = node.isSupported("LS",nullVersion);
@@ -15215,7 +15213,7 @@ exports.tests = {
     if(
       isSupported
     ) {
-      test.equal(featureImpl, node, 'LSUnspecified');
+      test.domSame(featureImpl, node, 'LSUnspecified');
 
     }
     isSupported = node.isSupported("LS-Async",nullVersion);
@@ -15224,7 +15222,7 @@ exports.tests = {
     if(
       isSupported
     ) {
-      test.equal(featureImpl, node, 'LSAsyncUnspecified');
+      test.domSame(featureImpl, node, 'LSAsyncUnspecified');
 
     }
     isSupported = node.isSupported("XPath",nullVersion);
@@ -15233,7 +15231,7 @@ exports.tests = {
     if(
       isSupported
     ) {
-      test.equal(featureImpl, node, 'XPathUnspecified');
+      test.domSame(featureImpl, node, 'XPathUnspecified');
 
     }
     isSupported = node.isSupported("+HTML",nullVersion);
@@ -15279,24 +15277,24 @@ exports.tests = {
     domImpl = doc.implementation;
     node = doc.createEntityReference("ent1");
     featureImpl = node.getFeature("Core",nullVersion);
-    test.equal(featureImpl, node, 'coreUnspecifiedVersion');
+    test.domSame(featureImpl, node, 'coreUnspecifiedVersion');
     featureImpl = node.getFeature("cOrE",nullVersion);
-    test.equal(featureImpl, node, 'cOrEUnspecifiedVersion');
+    test.domSame(featureImpl, node, 'cOrEUnspecifiedVersion');
     featureImpl = node.getFeature("+cOrE",nullVersion);
-    test.equal(featureImpl, node, 'PlusCoreUnspecifiedVersion');
+    test.domSame(featureImpl, node, 'PlusCoreUnspecifiedVersion');
     featureImpl = node.getFeature("org.w3c.domts.bogus.feature",nullVersion);
-    test.equal(featureImpl, null, 'unrecognizedFeature');
+    test.domSame(featureImpl, null, 'unrecognizedFeature');
     featureImpl = node.getFeature("cOrE","2.0");
-    test.equal(featureImpl, node, 'Core20');
+    test.domSame(featureImpl, node, 'Core20');
     featureImpl = node.getFeature("cOrE","3.0");
-    test.equal(featureImpl, node, 'Core30');
+    test.domSame(featureImpl, node, 'Core30');
     isSupported = node.isSupported("XML",nullVersion);
     featureImpl = node.getFeature("XML",nullVersion);
 
     if(
       isSupported
     ) {
-      test.equal(featureImpl, node, 'XMLUnspecified');
+      test.domSame(featureImpl, node, 'XMLUnspecified');
 
     }
     isSupported = node.isSupported("SVG",nullVersion);
@@ -15305,7 +15303,7 @@ exports.tests = {
     if(
       isSupported
     ) {
-      test.equal(featureImpl, node, 'SVGUnspecified');
+      test.domSame(featureImpl, node, 'SVGUnspecified');
 
     }
     isSupported = node.isSupported("HTML",nullVersion);
@@ -15314,7 +15312,7 @@ exports.tests = {
     if(
       isSupported
     ) {
-      test.equal(featureImpl, node, 'HTMLUnspecified');
+      test.domSame(featureImpl, node, 'HTMLUnspecified');
 
     }
     isSupported = node.isSupported("Events",nullVersion);
@@ -15323,7 +15321,7 @@ exports.tests = {
     if(
       isSupported
     ) {
-      test.equal(featureImpl, node, 'EventsUnspecified');
+      test.domSame(featureImpl, node, 'EventsUnspecified');
 
     }
     isSupported = node.isSupported("LS",nullVersion);
@@ -15332,7 +15330,7 @@ exports.tests = {
     if(
       isSupported
     ) {
-      test.equal(featureImpl, node, 'LSUnspecified');
+      test.domSame(featureImpl, node, 'LSUnspecified');
 
     }
     isSupported = node.isSupported("LS-Async",nullVersion);
@@ -15341,7 +15339,7 @@ exports.tests = {
     if(
       isSupported
     ) {
-      test.equal(featureImpl, node, 'LSAsyncUnspecified');
+      test.domSame(featureImpl, node, 'LSAsyncUnspecified');
 
     }
     isSupported = node.isSupported("XPath",nullVersion);
@@ -15350,7 +15348,7 @@ exports.tests = {
     if(
       isSupported
     ) {
-      test.equal(featureImpl, node, 'XPathUnspecified');
+      test.domSame(featureImpl, node, 'XPathUnspecified');
 
     }
     isSupported = node.isSupported("+HTML",nullVersion);
@@ -15397,24 +15395,24 @@ exports.tests = {
     node = doc.documentElement;
 
     featureImpl = node.getFeature("Core",nullVersion);
-    test.equal(featureImpl, node, 'coreUnspecifiedVersion');
+    test.domSame(featureImpl, node, 'coreUnspecifiedVersion');
     featureImpl = node.getFeature("cOrE",nullVersion);
-    test.equal(featureImpl, node, 'cOrEUnspecifiedVersion');
+    test.domSame(featureImpl, node, 'cOrEUnspecifiedVersion');
     featureImpl = node.getFeature("+cOrE",nullVersion);
-    test.equal(featureImpl, node, 'PlusCoreUnspecifiedVersion');
+    test.domSame(featureImpl, node, 'PlusCoreUnspecifiedVersion');
     featureImpl = node.getFeature("org.w3c.domts.bogus.feature",nullVersion);
-    test.equal(featureImpl, null, 'unrecognizedFeature');
+    test.domSame(featureImpl, null, 'unrecognizedFeature');
     featureImpl = node.getFeature("cOrE","2.0");
-    test.equal(featureImpl, node, 'Core20');
+    test.domSame(featureImpl, node, 'Core20');
     featureImpl = node.getFeature("cOrE","3.0");
-    test.equal(featureImpl, node, 'Core30');
+    test.domSame(featureImpl, node, 'Core30');
     isSupported = node.isSupported("XML",nullVersion);
     featureImpl = node.getFeature("XML",nullVersion);
 
     if(
       isSupported
     ) {
-      test.equal(featureImpl, node, 'XMLUnspecified');
+      test.domSame(featureImpl, node, 'XMLUnspecified');
 
     }
     isSupported = node.isSupported("SVG",nullVersion);
@@ -15423,7 +15421,7 @@ exports.tests = {
     if(
       isSupported
     ) {
-      test.equal(featureImpl, node, 'SVGUnspecified');
+      test.domSame(featureImpl, node, 'SVGUnspecified');
 
     }
     isSupported = node.isSupported("HTML",nullVersion);
@@ -15432,7 +15430,7 @@ exports.tests = {
     if(
       isSupported
     ) {
-      test.equal(featureImpl, node, 'HTMLUnspecified');
+      test.domSame(featureImpl, node, 'HTMLUnspecified');
 
     }
     isSupported = node.isSupported("Events",nullVersion);
@@ -15441,7 +15439,7 @@ exports.tests = {
     if(
       isSupported
     ) {
-      test.equal(featureImpl, node, 'EventsUnspecified');
+      test.domSame(featureImpl, node, 'EventsUnspecified');
 
     }
     isSupported = node.isSupported("LS",nullVersion);
@@ -15450,7 +15448,7 @@ exports.tests = {
     if(
       isSupported
     ) {
-      test.equal(featureImpl, node, 'LSUnspecified');
+      test.domSame(featureImpl, node, 'LSUnspecified');
 
     }
     isSupported = node.isSupported("LS-Async",nullVersion);
@@ -15459,7 +15457,7 @@ exports.tests = {
     if(
       isSupported
     ) {
-      test.equal(featureImpl, node, 'LSAsyncUnspecified');
+      test.domSame(featureImpl, node, 'LSAsyncUnspecified');
 
     }
     isSupported = node.isSupported("XPath",nullVersion);
@@ -15468,7 +15466,7 @@ exports.tests = {
     if(
       isSupported
     ) {
-      test.equal(featureImpl, node, 'XPathUnspecified');
+      test.domSame(featureImpl, node, 'XPathUnspecified');
 
     }
     isSupported = node.isSupported("+HTML",nullVersion);
@@ -15514,24 +15512,24 @@ exports.tests = {
     domImpl = doc.implementation;
     node = doc.createAttribute("title");
     featureImpl = node.getFeature("Core",nullVersion);
-    test.equal(featureImpl, node, 'coreUnspecifiedVersion');
+    test.domSame(featureImpl, node, 'coreUnspecifiedVersion');
     featureImpl = node.getFeature("cOrE",nullVersion);
-    test.equal(featureImpl, node, 'cOrEUnspecifiedVersion');
+    test.domSame(featureImpl, node, 'cOrEUnspecifiedVersion');
     featureImpl = node.getFeature("+cOrE",nullVersion);
-    test.equal(featureImpl, node, 'PlusCoreUnspecifiedVersion');
+    test.domSame(featureImpl, node, 'PlusCoreUnspecifiedVersion');
     featureImpl = node.getFeature("org.w3c.domts.bogus.feature",nullVersion);
-    test.equal(featureImpl, null, 'unrecognizedFeature');
+    test.domSame(featureImpl, null, 'unrecognizedFeature');
     featureImpl = node.getFeature("cOrE","2.0");
-    test.equal(featureImpl, node, 'Core20');
+    test.domSame(featureImpl, node, 'Core20');
     featureImpl = node.getFeature("cOrE","3.0");
-    test.equal(featureImpl, node, 'Core30');
+    test.domSame(featureImpl, node, 'Core30');
     isSupported = node.isSupported("XML",nullVersion);
     featureImpl = node.getFeature("XML",nullVersion);
 
     if(
       isSupported
     ) {
-      test.equal(featureImpl, node, 'XMLUnspecified');
+      test.domSame(featureImpl, node, 'XMLUnspecified');
 
     }
     isSupported = node.isSupported("SVG",nullVersion);
@@ -15540,7 +15538,7 @@ exports.tests = {
     if(
       isSupported
     ) {
-      test.equal(featureImpl, node, 'SVGUnspecified');
+      test.domSame(featureImpl, node, 'SVGUnspecified');
 
     }
     isSupported = node.isSupported("HTML",nullVersion);
@@ -15549,7 +15547,7 @@ exports.tests = {
     if(
       isSupported
     ) {
-      test.equal(featureImpl, node, 'HTMLUnspecified');
+      test.domSame(featureImpl, node, 'HTMLUnspecified');
 
     }
     isSupported = node.isSupported("Events",nullVersion);
@@ -15558,7 +15556,7 @@ exports.tests = {
     if(
       isSupported
     ) {
-      test.equal(featureImpl, node, 'EventsUnspecified');
+      test.domSame(featureImpl, node, 'EventsUnspecified');
 
     }
     isSupported = node.isSupported("LS",nullVersion);
@@ -15567,7 +15565,7 @@ exports.tests = {
     if(
       isSupported
     ) {
-      test.equal(featureImpl, node, 'LSUnspecified');
+      test.domSame(featureImpl, node, 'LSUnspecified');
 
     }
     isSupported = node.isSupported("LS-Async",nullVersion);
@@ -15576,7 +15574,7 @@ exports.tests = {
     if(
       isSupported
     ) {
-      test.equal(featureImpl, node, 'LSAsyncUnspecified');
+      test.domSame(featureImpl, node, 'LSAsyncUnspecified');
 
     }
     isSupported = node.isSupported("XPath",nullVersion);
@@ -15585,7 +15583,7 @@ exports.tests = {
     if(
       isSupported
     ) {
-      test.equal(featureImpl, node, 'XPathUnspecified');
+      test.domSame(featureImpl, node, 'XPathUnspecified');
 
     }
     isSupported = node.isSupported("+HTML",nullVersion);
@@ -15631,24 +15629,24 @@ exports.tests = {
     domImpl = doc.implementation;
     node = doc.createAttributeNS("http://www.w3.org/XML/1998/namespace","xml:lang");
     featureImpl = node.getFeature("Core",nullVersion);
-    test.equal(featureImpl, node, 'coreUnspecifiedVersion');
+    test.domSame(featureImpl, node, 'coreUnspecifiedVersion');
     featureImpl = node.getFeature("cOrE",nullVersion);
-    test.equal(featureImpl, node, 'cOrEUnspecifiedVersion');
+    test.domSame(featureImpl, node, 'cOrEUnspecifiedVersion');
     featureImpl = node.getFeature("+cOrE",nullVersion);
-    test.equal(featureImpl, node, 'PlusCoreUnspecifiedVersion');
+    test.domSame(featureImpl, node, 'PlusCoreUnspecifiedVersion');
     featureImpl = node.getFeature("org.w3c.domts.bogus.feature",nullVersion);
-    test.equal(featureImpl, null, 'unrecognizedFeature');
+    test.domSame(featureImpl, null, 'unrecognizedFeature');
     featureImpl = node.getFeature("cOrE","2.0");
-    test.equal(featureImpl, node, 'Core20');
+    test.domSame(featureImpl, node, 'Core20');
     featureImpl = node.getFeature("cOrE","3.0");
-    test.equal(featureImpl, node, 'Core30');
+    test.domSame(featureImpl, node, 'Core30');
     isSupported = node.isSupported("XML",nullVersion);
     featureImpl = node.getFeature("XML",nullVersion);
 
     if(
       isSupported
     ) {
-      test.equal(featureImpl, node, 'XMLUnspecified');
+      test.domSame(featureImpl, node, 'XMLUnspecified');
 
     }
     isSupported = node.isSupported("SVG",nullVersion);
@@ -15657,7 +15655,7 @@ exports.tests = {
     if(
       isSupported
     ) {
-      test.equal(featureImpl, node, 'SVGUnspecified');
+      test.domSame(featureImpl, node, 'SVGUnspecified');
 
     }
     isSupported = node.isSupported("HTML",nullVersion);
@@ -15666,7 +15664,7 @@ exports.tests = {
     if(
       isSupported
     ) {
-      test.equal(featureImpl, node, 'HTMLUnspecified');
+      test.domSame(featureImpl, node, 'HTMLUnspecified');
 
     }
     isSupported = node.isSupported("Events",nullVersion);
@@ -15675,7 +15673,7 @@ exports.tests = {
     if(
       isSupported
     ) {
-      test.equal(featureImpl, node, 'EventsUnspecified');
+      test.domSame(featureImpl, node, 'EventsUnspecified');
 
     }
     isSupported = node.isSupported("LS",nullVersion);
@@ -15684,7 +15682,7 @@ exports.tests = {
     if(
       isSupported
     ) {
-      test.equal(featureImpl, node, 'LSUnspecified');
+      test.domSame(featureImpl, node, 'LSUnspecified');
 
     }
     isSupported = node.isSupported("LS-Async",nullVersion);
@@ -15693,7 +15691,7 @@ exports.tests = {
     if(
       isSupported
     ) {
-      test.equal(featureImpl, node, 'LSAsyncUnspecified');
+      test.domSame(featureImpl, node, 'LSAsyncUnspecified');
 
     }
     isSupported = node.isSupported("XPath",nullVersion);
@@ -15702,7 +15700,7 @@ exports.tests = {
     if(
       isSupported
     ) {
-      test.equal(featureImpl, node, 'XPathUnspecified');
+      test.domSame(featureImpl, node, 'XPathUnspecified');
 
     }
     isSupported = node.isSupported("+HTML",nullVersion);
@@ -15749,24 +15747,24 @@ exports.tests = {
     domImpl = doc.implementation;
     node = doc.createProcessingInstruction("test-pi","foo");
     featureImpl = node.getFeature("Core",nullVersion);
-    test.equal(featureImpl, node, 'coreUnspecifiedVersion');
+    test.domSame(featureImpl, node, 'coreUnspecifiedVersion');
     featureImpl = node.getFeature("cOrE",nullVersion);
-    test.equal(featureImpl, node, 'cOrEUnspecifiedVersion');
+    test.domSame(featureImpl, node, 'cOrEUnspecifiedVersion');
     featureImpl = node.getFeature("+cOrE",nullVersion);
-    test.equal(featureImpl, node, 'PlusCoreUnspecifiedVersion');
+    test.domSame(featureImpl, node, 'PlusCoreUnspecifiedVersion');
     featureImpl = node.getFeature("org.w3c.domts.bogus.feature",nullVersion);
-    test.equal(featureImpl, null, 'unrecognizedFeature');
+    test.domSame(featureImpl, null, 'unrecognizedFeature');
     featureImpl = node.getFeature("cOrE","2.0");
-    test.equal(featureImpl, node, 'Core20');
+    test.domSame(featureImpl, node, 'Core20');
     featureImpl = node.getFeature("cOrE","3.0");
-    test.equal(featureImpl, node, 'Core30');
+    test.domSame(featureImpl, node, 'Core30');
     isSupported = node.isSupported("XML",nullVersion);
     featureImpl = node.getFeature("XML",nullVersion);
 
     if(
       isSupported
     ) {
-      test.equal(featureImpl, node, 'XMLUnspecified');
+      test.domSame(featureImpl, node, 'XMLUnspecified');
 
     }
     isSupported = node.isSupported("SVG",nullVersion);
@@ -15775,7 +15773,7 @@ exports.tests = {
     if(
       isSupported
     ) {
-      test.equal(featureImpl, node, 'SVGUnspecified');
+      test.domSame(featureImpl, node, 'SVGUnspecified');
 
     }
     isSupported = node.isSupported("HTML",nullVersion);
@@ -15784,7 +15782,7 @@ exports.tests = {
     if(
       isSupported
     ) {
-      test.equal(featureImpl, node, 'HTMLUnspecified');
+      test.domSame(featureImpl, node, 'HTMLUnspecified');
 
     }
     isSupported = node.isSupported("Events",nullVersion);
@@ -15793,7 +15791,7 @@ exports.tests = {
     if(
       isSupported
     ) {
-      test.equal(featureImpl, node, 'EventsUnspecified');
+      test.domSame(featureImpl, node, 'EventsUnspecified');
 
     }
     isSupported = node.isSupported("LS",nullVersion);
@@ -15802,7 +15800,7 @@ exports.tests = {
     if(
       isSupported
     ) {
-      test.equal(featureImpl, node, 'LSUnspecified');
+      test.domSame(featureImpl, node, 'LSUnspecified');
 
     }
     isSupported = node.isSupported("LS-Async",nullVersion);
@@ -15811,7 +15809,7 @@ exports.tests = {
     if(
       isSupported
     ) {
-      test.equal(featureImpl, node, 'LSAsyncUnspecified');
+      test.domSame(featureImpl, node, 'LSAsyncUnspecified');
 
     }
     isSupported = node.isSupported("XPath",nullVersion);
@@ -15820,7 +15818,7 @@ exports.tests = {
     if(
       isSupported
     ) {
-      test.equal(featureImpl, node, 'XPathUnspecified');
+      test.domSame(featureImpl, node, 'XPathUnspecified');
 
     }
     isSupported = node.isSupported("+HTML",nullVersion);
@@ -15867,24 +15865,24 @@ exports.tests = {
     domImpl = doc.implementation;
     node = doc.createComment("test comment");
     featureImpl = node.getFeature("Core",nullVersion);
-    test.equal(featureImpl, node, 'coreUnspecifiedVersion');
+    test.domSame(featureImpl, node, 'coreUnspecifiedVersion');
     featureImpl = node.getFeature("cOrE",nullVersion);
-    test.equal(featureImpl, node, 'cOrEUnspecifiedVersion');
+    test.domSame(featureImpl, node, 'cOrEUnspecifiedVersion');
     featureImpl = node.getFeature("+cOrE",nullVersion);
-    test.equal(featureImpl, node, 'PlusCoreUnspecifiedVersion');
+    test.domSame(featureImpl, node, 'PlusCoreUnspecifiedVersion');
     featureImpl = node.getFeature("org.w3c.domts.bogus.feature",nullVersion);
-    test.equal(featureImpl, null, 'unrecognizedFeature');
+    test.domSame(featureImpl, null, 'unrecognizedFeature');
     featureImpl = node.getFeature("cOrE","2.0");
-    test.equal(featureImpl, node, 'Core20');
+    test.domSame(featureImpl, node, 'Core20');
     featureImpl = node.getFeature("cOrE","3.0");
-    test.equal(featureImpl, node, 'Core30');
+    test.domSame(featureImpl, node, 'Core30');
     isSupported = node.isSupported("XML",nullVersion);
     featureImpl = node.getFeature("XML",nullVersion);
 
     if(
       isSupported
     ) {
-      test.equal(featureImpl, node, 'XMLUnspecified');
+      test.domSame(featureImpl, node, 'XMLUnspecified');
 
     }
     isSupported = node.isSupported("SVG",nullVersion);
@@ -15893,7 +15891,7 @@ exports.tests = {
     if(
       isSupported
     ) {
-      test.equal(featureImpl, node, 'SVGUnspecified');
+      test.domSame(featureImpl, node, 'SVGUnspecified');
 
     }
     isSupported = node.isSupported("HTML",nullVersion);
@@ -15902,7 +15900,7 @@ exports.tests = {
     if(
       isSupported
     ) {
-      test.equal(featureImpl, node, 'HTMLUnspecified');
+      test.domSame(featureImpl, node, 'HTMLUnspecified');
 
     }
     isSupported = node.isSupported("Events",nullVersion);
@@ -15911,7 +15909,7 @@ exports.tests = {
     if(
       isSupported
     ) {
-      test.equal(featureImpl, node, 'EventsUnspecified');
+      test.domSame(featureImpl, node, 'EventsUnspecified');
 
     }
     isSupported = node.isSupported("LS",nullVersion);
@@ -15920,7 +15918,7 @@ exports.tests = {
     if(
       isSupported
     ) {
-      test.equal(featureImpl, node, 'LSUnspecified');
+      test.domSame(featureImpl, node, 'LSUnspecified');
 
     }
     isSupported = node.isSupported("LS-Async",nullVersion);
@@ -15929,7 +15927,7 @@ exports.tests = {
     if(
       isSupported
     ) {
-      test.equal(featureImpl, node, 'LSAsyncUnspecified');
+      test.domSame(featureImpl, node, 'LSAsyncUnspecified');
 
     }
     isSupported = node.isSupported("XPath",nullVersion);
@@ -15938,7 +15936,7 @@ exports.tests = {
     if(
       isSupported
     ) {
-      test.equal(featureImpl, node, 'XPathUnspecified');
+      test.domSame(featureImpl, node, 'XPathUnspecified');
 
     }
     isSupported = node.isSupported("+HTML",nullVersion);
@@ -15989,24 +15987,24 @@ exports.tests = {
     node = elem.firstChild;
 
     featureImpl = node.getFeature("Core",nullVersion);
-    test.equal(featureImpl, node, 'coreUnspecifiedVersion');
+    test.domSame(featureImpl, node, 'coreUnspecifiedVersion');
     featureImpl = node.getFeature("cOrE",nullVersion);
-    test.equal(featureImpl, node, 'cOrEUnspecifiedVersion');
+    test.domSame(featureImpl, node, 'cOrEUnspecifiedVersion');
     featureImpl = node.getFeature("+cOrE",nullVersion);
-    test.equal(featureImpl, node, 'PlusCoreUnspecifiedVersion');
+    test.domSame(featureImpl, node, 'PlusCoreUnspecifiedVersion');
     featureImpl = node.getFeature("org.w3c.domts.bogus.feature",nullVersion);
-    test.equal(featureImpl, null, 'unrecognizedFeature');
+    test.domSame(featureImpl, null, 'unrecognizedFeature');
     featureImpl = node.getFeature("cOrE","2.0");
-    test.equal(featureImpl, node, 'Core20');
+    test.domSame(featureImpl, node, 'Core20');
     featureImpl = node.getFeature("cOrE","3.0");
-    test.equal(featureImpl, node, 'Core30');
+    test.domSame(featureImpl, node, 'Core30');
     isSupported = node.isSupported("XML",nullVersion);
     featureImpl = node.getFeature("XML",nullVersion);
 
     if(
       isSupported
     ) {
-      test.equal(featureImpl, node, 'XMLUnspecified');
+      test.domSame(featureImpl, node, 'XMLUnspecified');
 
     }
     isSupported = node.isSupported("SVG",nullVersion);
@@ -16015,7 +16013,7 @@ exports.tests = {
     if(
       isSupported
     ) {
-      test.equal(featureImpl, node, 'SVGUnspecified');
+      test.domSame(featureImpl, node, 'SVGUnspecified');
 
     }
     isSupported = node.isSupported("HTML",nullVersion);
@@ -16024,7 +16022,7 @@ exports.tests = {
     if(
       isSupported
     ) {
-      test.equal(featureImpl, node, 'HTMLUnspecified');
+      test.domSame(featureImpl, node, 'HTMLUnspecified');
 
     }
     isSupported = node.isSupported("Events",nullVersion);
@@ -16033,7 +16031,7 @@ exports.tests = {
     if(
       isSupported
     ) {
-      test.equal(featureImpl, node, 'EventsUnspecified');
+      test.domSame(featureImpl, node, 'EventsUnspecified');
 
     }
     isSupported = node.isSupported("LS",nullVersion);
@@ -16042,7 +16040,7 @@ exports.tests = {
     if(
       isSupported
     ) {
-      test.equal(featureImpl, node, 'LSUnspecified');
+      test.domSame(featureImpl, node, 'LSUnspecified');
 
     }
     isSupported = node.isSupported("LS-Async",nullVersion);
@@ -16051,7 +16049,7 @@ exports.tests = {
     if(
       isSupported
     ) {
-      test.equal(featureImpl, node, 'LSAsyncUnspecified');
+      test.domSame(featureImpl, node, 'LSAsyncUnspecified');
 
     }
     isSupported = node.isSupported("XPath",nullVersion);
@@ -16060,7 +16058,7 @@ exports.tests = {
     if(
       isSupported
     ) {
-      test.equal(featureImpl, node, 'XPathUnspecified');
+      test.domSame(featureImpl, node, 'XPathUnspecified');
 
     }
     isSupported = node.isSupported("+HTML",nullVersion);
@@ -16106,24 +16104,24 @@ exports.tests = {
     domImpl = doc.implementation;
     node = doc.createCDATASection("some text");
     featureImpl = node.getFeature("Core",nullVersion);
-    test.equal(featureImpl, node, 'coreUnspecifiedVersion');
+    test.domSame(featureImpl, node, 'coreUnspecifiedVersion');
     featureImpl = node.getFeature("cOrE",nullVersion);
-    test.equal(featureImpl, node, 'cOrEUnspecifiedVersion');
+    test.domSame(featureImpl, node, 'cOrEUnspecifiedVersion');
     featureImpl = node.getFeature("+cOrE",nullVersion);
-    test.equal(featureImpl, node, 'PlusCoreUnspecifiedVersion');
+    test.domSame(featureImpl, node, 'PlusCoreUnspecifiedVersion');
     featureImpl = node.getFeature("org.w3c.domts.bogus.feature",nullVersion);
-    test.equal(featureImpl, null, 'unrecognizedFeature');
+    test.domSame(featureImpl, null, 'unrecognizedFeature');
     featureImpl = node.getFeature("cOrE","2.0");
-    test.equal(featureImpl, node, 'Core20');
+    test.domSame(featureImpl, node, 'Core20');
     featureImpl = node.getFeature("cOrE","3.0");
-    test.equal(featureImpl, node, 'Core30');
+    test.domSame(featureImpl, node, 'Core30');
     isSupported = node.isSupported("XML",nullVersion);
     featureImpl = node.getFeature("XML",nullVersion);
 
     if(
       isSupported
     ) {
-      test.equal(featureImpl, node, 'XMLUnspecified');
+      test.domSame(featureImpl, node, 'XMLUnspecified');
 
     }
     isSupported = node.isSupported("SVG",nullVersion);
@@ -16132,7 +16130,7 @@ exports.tests = {
     if(
       isSupported
     ) {
-      test.equal(featureImpl, node, 'SVGUnspecified');
+      test.domSame(featureImpl, node, 'SVGUnspecified');
 
     }
     isSupported = node.isSupported("HTML",nullVersion);
@@ -16141,7 +16139,7 @@ exports.tests = {
     if(
       isSupported
     ) {
-      test.equal(featureImpl, node, 'HTMLUnspecified');
+      test.domSame(featureImpl, node, 'HTMLUnspecified');
 
     }
     isSupported = node.isSupported("Events",nullVersion);
@@ -16150,7 +16148,7 @@ exports.tests = {
     if(
       isSupported
     ) {
-      test.equal(featureImpl, node, 'EventsUnspecified');
+      test.domSame(featureImpl, node, 'EventsUnspecified');
 
     }
     isSupported = node.isSupported("LS",nullVersion);
@@ -16159,7 +16157,7 @@ exports.tests = {
     if(
       isSupported
     ) {
-      test.equal(featureImpl, node, 'LSUnspecified');
+      test.domSame(featureImpl, node, 'LSUnspecified');
 
     }
     isSupported = node.isSupported("LS-Async",nullVersion);
@@ -16168,7 +16166,7 @@ exports.tests = {
     if(
       isSupported
     ) {
-      test.equal(featureImpl, node, 'LSAsyncUnspecified');
+      test.domSame(featureImpl, node, 'LSAsyncUnspecified');
 
     }
     isSupported = node.isSupported("XPath",nullVersion);
@@ -16177,7 +16175,7 @@ exports.tests = {
     if(
       isSupported
     ) {
-      test.equal(featureImpl, node, 'XPathUnspecified');
+      test.domSame(featureImpl, node, 'XPathUnspecified');
 
     }
     isSupported = node.isSupported("+HTML",nullVersion);
@@ -16229,24 +16227,24 @@ exports.tests = {
 
     node = entities.getNamedItem("ent1");
     featureImpl = node.getFeature("Core",nullVersion);
-    test.equal(featureImpl, node, 'coreUnspecifiedVersion');
+    test.domSame(featureImpl, node, 'coreUnspecifiedVersion');
     featureImpl = node.getFeature("cOrE",nullVersion);
-    test.equal(featureImpl, node, 'cOrEUnspecifiedVersion');
+    test.domSame(featureImpl, node, 'cOrEUnspecifiedVersion');
     featureImpl = node.getFeature("+cOrE",nullVersion);
-    test.equal(featureImpl, node, 'PlusCoreUnspecifiedVersion');
+    test.domSame(featureImpl, node, 'PlusCoreUnspecifiedVersion');
     featureImpl = node.getFeature("org.w3c.domts.bogus.feature",nullVersion);
-    test.equal(featureImpl, null, 'unrecognizedFeature');
+    test.domSame(featureImpl, null, 'unrecognizedFeature');
     featureImpl = node.getFeature("cOrE","2.0");
-    test.equal(featureImpl, node, 'Core20');
+    test.domSame(featureImpl, node, 'Core20');
     featureImpl = node.getFeature("cOrE","3.0");
-    test.equal(featureImpl, node, 'Core30');
+    test.domSame(featureImpl, node, 'Core30');
     isSupported = node.isSupported("XML",nullVersion);
     featureImpl = node.getFeature("XML",nullVersion);
 
     if(
       isSupported
     ) {
-      test.equal(featureImpl, node, 'XMLUnspecified');
+      test.domSame(featureImpl, node, 'XMLUnspecified');
 
     }
     isSupported = node.isSupported("SVG",nullVersion);
@@ -16255,7 +16253,7 @@ exports.tests = {
     if(
       isSupported
     ) {
-      test.equal(featureImpl, node, 'SVGUnspecified');
+      test.domSame(featureImpl, node, 'SVGUnspecified');
 
     }
     isSupported = node.isSupported("HTML",nullVersion);
@@ -16264,7 +16262,7 @@ exports.tests = {
     if(
       isSupported
     ) {
-      test.equal(featureImpl, node, 'HTMLUnspecified');
+      test.domSame(featureImpl, node, 'HTMLUnspecified');
 
     }
     isSupported = node.isSupported("Events",nullVersion);
@@ -16273,7 +16271,7 @@ exports.tests = {
     if(
       isSupported
     ) {
-      test.equal(featureImpl, node, 'EventsUnspecified');
+      test.domSame(featureImpl, node, 'EventsUnspecified');
 
     }
     isSupported = node.isSupported("LS",nullVersion);
@@ -16282,7 +16280,7 @@ exports.tests = {
     if(
       isSupported
     ) {
-      test.equal(featureImpl, node, 'LSUnspecified');
+      test.domSame(featureImpl, node, 'LSUnspecified');
 
     }
     isSupported = node.isSupported("LS-Async",nullVersion);
@@ -16291,7 +16289,7 @@ exports.tests = {
     if(
       isSupported
     ) {
-      test.equal(featureImpl, node, 'LSAsyncUnspecified');
+      test.domSame(featureImpl, node, 'LSAsyncUnspecified');
 
     }
     isSupported = node.isSupported("XPath",nullVersion);
@@ -16300,7 +16298,7 @@ exports.tests = {
     if(
       isSupported
     ) {
-      test.equal(featureImpl, node, 'XPathUnspecified');
+      test.domSame(featureImpl, node, 'XPathUnspecified');
 
     }
     isSupported = node.isSupported("+HTML",nullVersion);
@@ -16352,24 +16350,24 @@ exports.tests = {
 
     node = notations.getNamedItem("notation1");
     featureImpl = node.getFeature("Core",nullVersion);
-    test.equal(featureImpl, node, 'coreUnspecifiedVersion');
+    test.domSame(featureImpl, node, 'coreUnspecifiedVersion');
     featureImpl = node.getFeature("cOrE",nullVersion);
-    test.equal(featureImpl, node, 'cOrEUnspecifiedVersion');
+    test.domSame(featureImpl, node, 'cOrEUnspecifiedVersion');
     featureImpl = node.getFeature("+cOrE",nullVersion);
-    test.equal(featureImpl, node, 'PlusCoreUnspecifiedVersion');
+    test.domSame(featureImpl, node, 'PlusCoreUnspecifiedVersion');
     featureImpl = node.getFeature("org.w3c.domts.bogus.feature",nullVersion);
-    test.equal(featureImpl, null, 'unrecognizedFeature');
+    test.domSame(featureImpl, null, 'unrecognizedFeature');
     featureImpl = node.getFeature("cOrE","2.0");
-    test.equal(featureImpl, node, 'Core20');
+    test.domSame(featureImpl, node, 'Core20');
     featureImpl = node.getFeature("cOrE","3.0");
-    test.equal(featureImpl, node, 'Core30');
+    test.domSame(featureImpl, node, 'Core30');
     isSupported = node.isSupported("XML",nullVersion);
     featureImpl = node.getFeature("XML",nullVersion);
 
     if(
       isSupported
     ) {
-      test.equal(featureImpl, node, 'XMLUnspecified');
+      test.domSame(featureImpl, node, 'XMLUnspecified');
 
     }
     isSupported = node.isSupported("SVG",nullVersion);
@@ -16378,7 +16376,7 @@ exports.tests = {
     if(
       isSupported
     ) {
-      test.equal(featureImpl, node, 'SVGUnspecified');
+      test.domSame(featureImpl, node, 'SVGUnspecified');
 
     }
     isSupported = node.isSupported("HTML",nullVersion);
@@ -16387,7 +16385,7 @@ exports.tests = {
     if(
       isSupported
     ) {
-      test.equal(featureImpl, node, 'HTMLUnspecified');
+      test.domSame(featureImpl, node, 'HTMLUnspecified');
 
     }
     isSupported = node.isSupported("Events",nullVersion);
@@ -16396,7 +16394,7 @@ exports.tests = {
     if(
       isSupported
     ) {
-      test.equal(featureImpl, node, 'EventsUnspecified');
+      test.domSame(featureImpl, node, 'EventsUnspecified');
 
     }
     isSupported = node.isSupported("LS",nullVersion);
@@ -16405,7 +16403,7 @@ exports.tests = {
     if(
       isSupported
     ) {
-      test.equal(featureImpl, node, 'LSUnspecified');
+      test.domSame(featureImpl, node, 'LSUnspecified');
 
     }
     isSupported = node.isSupported("LS-Async",nullVersion);
@@ -16414,7 +16412,7 @@ exports.tests = {
     if(
       isSupported
     ) {
-      test.equal(featureImpl, node, 'LSAsyncUnspecified');
+      test.domSame(featureImpl, node, 'LSAsyncUnspecified');
 
     }
     isSupported = node.isSupported("XPath",nullVersion);
@@ -16423,7 +16421,7 @@ exports.tests = {
     if(
       isSupported
     ) {
-      test.equal(featureImpl, node, 'XPathUnspecified');
+      test.domSame(featureImpl, node, 'XPathUnspecified');
 
     }
     isSupported = node.isSupported("+HTML",nullVersion);
@@ -16905,9 +16903,25 @@ exports.tests = {
     appendedChild = elem.appendChild(entRef);
     appendedChild = elem.appendChild(pi);
     appendedChild = elem.appendChild(cdata);
-    textContent = elem.textContent;
-
+    /* EDIT: Elijah Insua
+     *  This test is impossible to pass in it's original form for two reasons:
+     *  1) elem was not being added to the document
+     *     - technically this is 'possible', but would probably leak memory
+     *
+     *     TODO: consider doing this.
+     *
+     *  2) textContent is calculated before doc.normalizeDocument. since it is a local var
+     *     it will never be recalculated.
+     *
+     *  FIXES:
+     *    append appendedChild and move the textContent calculation to AFTER the
+     *    normalizeDocument call
+     *
+     */
+    doc.documentElement.appendChild(elem);
     doc.normalizeDocument();
+
+    textContent = elem.textContent;
     test.equal(textContent, "Text βCData", 'nodegettextcontent15');
 
     test.done()
