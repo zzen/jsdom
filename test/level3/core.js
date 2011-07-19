@@ -48,6 +48,7 @@ function UserDataMonitor() {
   this.allNotifications = [];
 }
 
+
 UserDataMonitor.prototype.handle = function(operation, key, data, src, dst) {
   this.allNotifications.push(new UserDataNotification(operation, key, data, src, dst));
 }
@@ -57,6 +58,16 @@ var getImplementation = function() {
   var doc = new core.Document();
   return doc.implementation;
 };
+
+var implementationAttribute = {
+  ignoringElementContentWhitespace : true
+};
+
+function getImplementationAttribute (attr) {
+  return implementationAttribute[attr] || false;
+}
+
+
 
 exports.tests = {
   /**
