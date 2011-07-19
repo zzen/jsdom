@@ -5,8 +5,7 @@ module.exports.barfoo =  function () {
 
   var doc = new dom.Document("html");
 
-  doc._baseURI = 'file://' + __dirname;
-  doc.documentURI = doc._baseURI;
+  doc.documentURI = 'barfoo';
 
   /*
   <!ELEMENT html (head, body)>

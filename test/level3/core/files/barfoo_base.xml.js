@@ -56,8 +56,7 @@ module.exports.barfoo_base =  function () {
     defaultsAttributes
   );
 
-  doc._baseURI = 'file://' + __filename;
-  doc.documentURI = 'file://' + __filename;
+  doc.documentURI = 'barfoo_base';
 
   doc.doctype = docType;
 
@@ -69,7 +68,7 @@ module.exports.barfoo_base =  function () {
   // <html xmlns='http://www.w3.org/1999/xhtml' xml:base="http://www.w3.org/DOM/L3Test">
   var xmlns = 'http://www.w3.org/1999/xhtml';
   var html      = doc.createElementNS(xmlns,"html");
-  html.setAttributeNS('http://www.w3.org/DOM/L3Test', 'xml:base');
+  html.setAttributeNS('http://www.w3.org/XML/1998/namespace', 'xml:base', 'http://www.w3.org/DOM/L3Test');
 
   //<head>
   var head = doc.createElementNS(xmlns, 'head');
@@ -83,7 +82,7 @@ module.exports.barfoo_base =  function () {
 
   // <body xml:base="http://www.w3.org/DOM/EmployeeID" id="body">
   var body = doc.createElementNS(xmlns, 'body');
-  body.setAttributeNS(null, 'xml:base', 'http://www.w3.org/DOM/EmployeeID')
+  body.setAttributeNS('http://www.w3.org/XML/1998/namespace', 'xml:base', 'http://www.w3.org/DOM/EmployeeID')
   body.setAttributeNS(null, 'id')
   body.setAttribute('onload', 'parent.loadComplete()');
 

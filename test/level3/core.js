@@ -15,6 +15,7 @@ var typeinfo_xml = require("./core/files/typeinfo.xml");
 var hc_nodtdstaff = require("./core/files/hc_nodtdstaff.xml");
 var hc_staff = require("./core/files/hc_staff.xml");
 var typeinfo = require("./core/files/typeinfo.xml");
+var util = require('../../lib/jsdom/util');
 var DOMErrorMonitor = function() {
   this.errors = [];
 
@@ -60,7 +61,8 @@ var getImplementation = function() {
 };
 
 var implementationAttribute = {
-  ignoringElementContentWhitespace : true
+  ignoringElementContentWhitespace : true,
+  expandEntityReferences : true
 };
 
 function getImplementationAttribute (attr) {
@@ -5118,7 +5120,6 @@ exports.tests = {
     domConfig.setParameter("error-handler", errorMonitor.handleError);
     doc.normalizeDocument();
     errors = errorMonitor.allErrors;
-console.log(errors);
     for(var indexN100B6 = 0;indexN100B6 < errors.length; indexN100B6++) {
       error = errors[indexN100B6];
       severity = error.severity;
@@ -14873,7 +14874,6 @@ console.log(errors);
 
     }
     baseURI = textNode.baseURI;
-
     test.equal(baseURI, null, 'baseURI');
 
     test.done()

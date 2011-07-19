@@ -6,59 +6,60 @@
 </head>
 <body onload="parent.loadComplete()">
 <p>bar&ent2;&ent1;</p>
-<p xml:base="http://www.example.com/bogus_base">bar&ent2;&ent1;</p>
+
 &ent3;
 </body>
 </html>*/
 
 
 var dom = require('../../../../lib/jsdom/level3/core').dom.level3.core;
+var util = require('../../../../lib/jsdom/util');
 
 module.exports.external_barfoo =  function () {
 
   var doc = new dom.Document("html");
   doc._inputEncoding = 'UTF-8';
   doc._xmlEncoding = 'UTF-8';
-  doc._baseURI = 'file://' + __dirname;
-  doc._documentURI = doc._baseURI;
+  doc.documentURI = 'external_barfoo';
 
-  /*
-  <!DOCTYPE html [
-  <!ENTITY ent1 SYSTEM 'external_foo.ent'>
-  <!ENTITY ent2 SYSTEM 'external_foobr.ent'>
-  <!ENTITY ent3 SYSTEM 'external_widget.ent'>
-  <!ENTITY ent5 PUBLIC "entityURI" "entityFile" NDATA notation1>
-  <!ELEMENT html (head, body)>
-  <!ATTLIST html xmlns CDATA #IMPLIED>
-  <!ELEMENT head (title,script*)>
-  <!ELEMENT title (#PCDATA)>
-  <!ELEMENT script (#PCDATA)>
-  <!ATTLIST script
-       src CDATA #IMPLIED
-       type CDATA #IMPLIED
-       charset CDATA #IMPLIED>
-  <!ELEMENT body (p*)>
-  <!ATTLIST body onload CDATA #IMPLIED>
-  <!ELEMENT p (#PCDATA|br)*>
-  <!ATTLIST p xml:base CDATA #IMPLIED
-              xmlns CDATA #IMPLIED>
-  <!ELEMENT br EMPTY>
-  <!NOTATION notation1 PUBLIC "notation1File">
-  ]>*/
+  // <!ENTITY ent1 SYSTEM 'external_foo.ent'> // <?xml version="1.0" encoding="uTf-16"?>foo
+  var ent1 = doc.createEntityNode('ent1');
+  var ent1_pi = doc.createProcessingInstruction('xml');
+  ent1_pi._xmlVersion = '1.0';
+  ent1_pi._xmlEncoding = 'uTf-16';
+  ent1._readonly = false;
+  ent1.appendChild(ent1_pi);
+  ent1.appendChild(doc.createTextNode("foo"));
+  util.markTreeReadonly(ent1);
 
+  // <!ENTITY ent2 SYSTEM 'external_foobr.ent'> // <br/>foo
+  var ent2 = doc.createEntityNode('ent2');
+  ent2._readonly = false;
+  ent2.appendChild(doc.createElement('br'));
+  ent2.appendChild(doc.createTextNode("foo"));
+  util.markTreeReadonly(ent2);
 
-  //<!ENTITY ent1 'foo'>
-  var ent1 = doc.createEntityNode('ent1', doc.createTextNode('foo'));
+  // <!ENTITY ent3 SYSTEM 'external_widget.ent'> // <p xmlns='http://www.w3.org/1999/xhtml'>widget</p>
+  var ent3 = doc.createEntityNode('ent3');
+  ent3._readonly = false;
+  var ent3_p = doc.createElementNS('http://www.w3.org/1999/xhtml', 'p');
 
-  //<!ENTITY ent2 'foo<br/>'>
-  var ent2Element = doc.createElement('ent2');
-  ent2Element.appendChild(doc.createTextNode("foo"));
-  ent2Element.appendChild(doc.createElement('br'));
+  // set the baseURL to external_widget
+  ent3._baseURI = 'external_widget';
+  ent3_p.appendChild(doc.createTextNode('widget'));
+  ent3.appendChild(ent3_p);
+
+  util.markTreeReadonly(ent3);
+
+  // <!ENTITY ent5 PUBLIC "entityURI" "entityFile" NDATA notation1>
+  var ent5 = doc.createEntityNode('ent5');
 
   var entities = new dom.EntityNodeMap(
     doc,
     ent1,
-    ent2Element
+    ent2,
+    ent3,
+    ent5
   );
 
   /*
@@ -97,7 +98,7 @@ module.exports.external_barfoo =  function () {
   var head = doc.createElementNS(xmlns, 'head');
   //<title>replaceWholeText sample</title>
   var title = doc.createElementNS(xmlns, 'title');
-  title.appendChild(doc.createTextNode('replaceWholeText sample'))
+  title.appendChild(doc.createTextNode('external entity encoding sample'))
   head.appendChild(title);
   //</head>
   html.appendChild(head);
@@ -106,10 +107,21 @@ module.exports.external_barfoo =  function () {
   var body = doc.createElementNS(xmlns, 'body');
   body.setAttribute('onload', 'parent.loadComplete()');
 
-  //<p>bar</p>
-  var p = doc.createElementNS(xmlns, 'p');
+  // <p>bar&ent2;&ent1;</p>
+  p = doc.createElementNS(xmlns, 'p');
   p.appendChild(doc.createTextNode('bar'));
+  p.appendChild(doc.createEntityReference('ent2'));
+  p.appendChild(doc.createEntityReference('ent1'));
   body.appendChild(p);
+
+  // <p xml:base="http://www.example.com/bogus_base">bar&ent2;&ent1;</p>
+  var p = doc.createElementNS(xmlns, 'p');
+  p.setAttributeNS('http://www.w3.org/XML/namespace', 'base', 'http://www.example.com/bogus_base');
+  p.appendChild(doc.createTextNode('bar'));
+  p.appendChild(doc.createEntityReference('ent2'));
+  p.appendChild(doc.createEntityReference('ent1'));
+  body.appendChild(p);
+  body.appendChild(doc.createEntityReference('ent3'));
 
   //</body>
   html.appendChild(body);

@@ -3,7 +3,7 @@ var util = require("../../../../lib/jsdom/util");
 exports.hc_staff = function() {
 
   var doc = new dom.Document("html");
-  doc.documentURI = 'hc_staff.xml';
+  doc.documentURI = 'hc_staff';
   doc._xmlVersion = '1.0';
   var implementation = new dom.DOMImplementation(doc, {
     "XML" : ["1.0", "2.0"],
