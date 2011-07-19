@@ -24239,7 +24239,6 @@ exports.tests = {
   /**
    *
 
-
    Using setTextContent on this DocumentType node, attempt to set the textContent of a
    Notation node to textContent.  Retreive the textContent and verify if it is null.
 
