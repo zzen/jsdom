@@ -35,7 +35,7 @@ exports.hc_staff = function() {
     doc.createEntityNode("alpha", doc.createTextNode("α")),
     doc.createEntityNode("beta", doc.createTextNode("β")),
     doc.createEntityNode("gamma", doc.createTextNode("&#947;")),
-    doc.createEntityNode("delta", doc.createTextNode("δ")),
+    doc.createEntityNode("delta", doc.createTextNode("δ ")),
     doc.createEntityNode("epsilon", doc.createTextNode("&#949;")),
     ent4
   );

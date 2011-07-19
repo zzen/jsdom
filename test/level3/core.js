@@ -6417,6 +6417,7 @@ exports.tests = {
     doc = hc_staff.hc_staff();
     childList = doc.getElementsByTagName("acronym");
     element = childList.item(3);
+
     renamedclass = doc.renameNode(element,"http://www.w3.org/DOM/Test","qnam:renamedNode");
     nodeName = renamedclass.nodeName;
 
