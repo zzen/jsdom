@@ -1,5 +1,5 @@
 var dom = require("../../../../lib/jsdom/level3/core").dom.level3.core;
-
+var util = require("../../../../lib/jsdom/util");
 exports.hc_staff = function() {
 
   var doc = new dom.Document("html");
@@ -16,6 +16,17 @@ exports.hc_staff = function() {
     doc.createNotationNode("notation2",null, "notation2File")
   );
 
+  // <!ENTITY ent4 "<span xmlns='http://www.w3.org/1999/xhtml'>Element data</span><?PItarget PIdata?>">
+  var ent4 = doc.createEntityNode('ent4');
+  var ent4_span = doc.createElement('span');
+  ent4_span.setAttributeNS("http://www.w3.org/2000/xmlns/", 'xmlns', 'http://www.w3.org/1999/xhtml');
+  var ent4_pi = doc.createProcessingInstruction('PItarget', 'PIdata');
+
+  ent4._readonly = false;
+  ent4.appendChild(ent4_span);
+  ent4.appendChild(ent4_pi);
+  util.markTreeReadonly(ent4);
+
   // TODO: consider importing the master list of entities
   //       http://www.w3schools.com/tags/ref_symbols.asp
   var entities = new dom.EntityNodeMap(
@@ -24,7 +35,8 @@ exports.hc_staff = function() {
     doc.createEntityNode("beta", doc.createTextNode("&#946;")),
     doc.createEntityNode("gamma", doc.createTextNode("&#947;")),
     doc.createEntityNode("delta", doc.createTextNode("&#948;")),
-    doc.createEntityNode("epsilon", doc.createTextNode("&#949;"))
+    doc.createEntityNode("epsilon", doc.createTextNode("&#949;")),
+    ent4
   );
 
   // <!ATTLIST acronym dir CDATA "ltr">
@@ -128,6 +140,7 @@ Pending schemaInfo implementation
     salaries.push(salary);
   }
 
+  employees[0].setAttributeNS("http://www.w3.org/2000/xmlns/","xmlns:dmstc", "http://www.usa.com")
   ids[0].appendChild(doc.createTextNode("EMP0001"));
   salaries[0].appendChild(doc.createTextNode("56,000"));
   addresses[0].setAttribute("title", "Yes");
@@ -137,31 +150,37 @@ Pending schemaInfo implementation
   genders[0].appendChild(doc.createTextNode("Female"));
   positions[0].appendChild(doc.createTextNode("Accountant"));
 
+  employees[1].setAttributeNS("http://www.w3.org/2000/xmlns/","xmlns:dmstc", "http://www.usa.com")
   ids[1].appendChild(doc.createTextNode("EMP0002"));
   salaries[1].appendChild(doc.createTextNode("35,000"));
   addresses[1].setAttribute("title", "Yes");
   addresses[1].setAttribute("class", "Yes");
   addresses[1].appendChild(doc.createTextNode("β Dallas, γ\n 98554"));
+  addresses[1].setAttributeNS("http://www.w3.org/2001/XMLSchema-instance", "xsi:noNamespaceSchemaLocation", "Yes");
   names[1].appendChild(doc.createTextNode("Martha Raynolds"));
   names[1].appendChild(doc.createCDATASection("This is a CDATASection with EntityReference number 2 &amp;ent2;"));
   names[1].appendChild(doc.createCDATASection("This is an adjacent CDATASection with a reference to a tab &amp;tab;"));
   genders[1].appendChild(doc.createTextNode("Female"));
   positions[1].appendChild(doc.createTextNode("Secretary"));
 
+  employees[2].setAttributeNS('http://www.w3.org/2000/xmlns/','xmlns:dmstc', 'http://www.netzero.com')
   ids[2].appendChild(doc.createTextNode("EMP0003"));
   salaries[2].appendChild(doc.createTextNode("100,000"));
   addresses[2].setAttribute("title", "Yes");
   addresses[2].setAttribute("class", "No");
+  addresses[2].setAttributeNS("http://www.w3.org/2001/XMLSchema-instance", "xsi:noNamespaceSchemaLocation", "Yes");
   addresses[2].appendChild(doc.createTextNode("PO Box 27 Irving, texas 98553"));
   names[2].appendChild(doc.createTextNode("Roger\n Jones")) ;
-  genders[2].appendChild(doc.createEntityReference("&delta;"));//Text("&delta;"));
+  genders[2].appendChild(doc.createEntityReference("&ent4;"));//Text("&delta;"));
   positions[2].appendChild(doc.createTextNode("Department Manager"));
 
+  employees[3].setAttributeNS('http://www.w3.org/2000/xmlns/','xmlns:nm', "http://www.altavista.com")
   ids[3].appendChild(doc.createTextNode("EMP0004"));
   salaries[3].appendChild(doc.createTextNode("95,000"));
   addresses[3].setAttribute("title", "Yes");
   addresses[3].setAttribute("class", "Yα");
   addresses[3].setAttribute("id", "emp4_addr");
+  addresses[3].setAttributeNS("http://www.w3.org/2001/XMLSchema-instance", "xsi:noNamespaceSchemaLocation", "Yes");
   addresses[3].appendChild(doc.createTextNode("27 South Road. Dallas, Texas 98556"));
   names[3].appendChild(doc.createTextNode("Jeny Oconnor"));
   genders[3].appendChild(doc.createTextNode("Female"));
@@ -170,6 +189,7 @@ Pending schemaInfo implementation
   ids[4].appendChild(doc.createTextNode("EMP0005"));
   salaries[4].appendChild(doc.createTextNode("90,000"));
   addresses[4].setAttribute("title", "Yes");
+  addresses[4].setAttribute("class", "Yes");
   addresses[4].appendChild(doc.createTextNode("1821 Nordic. Road, Irving Texas 98558"));
   names[4].appendChild(doc.createTextNode("Robert Myers"));
   genders[4].appendChild(doc.createTextNode("male"));
