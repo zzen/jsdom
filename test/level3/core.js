@@ -44,15 +44,17 @@ function UserDataNotification(operation, key, data, src, dst) {
   this.src = src;
   this.dst = dst;
 }
+UserDataNotification.prototype = {};
 
 function UserDataMonitor() {
+  var that = this;
   this.allNotifications = [];
+  this.handle = function(operation, key, data, src, dst) {
+    that.allNotifications.push(new UserDataNotification(operation, key, data, src, dst));
+  }
 }
+UserDataMonitor.prototype = {};
 
-
-UserDataMonitor.prototype.handle = function(operation, key, data, src, dst) {
-  this.allNotifications.push(new UserDataNotification(operation, key, data, src, dst));
-}
 
 var core = require("../../lib/jsdom/level3/core").dom.level3.core;
 var getImplementation = function() {
@@ -28313,10 +28315,11 @@ exports.tests = {
     var cs = {greeting: 0, salutation: 0}
     var doc = barfoo.barfoo();
     var node = doc.getElementsByTagName('p').item(0);
-    node.setUserData('greeting', 'Hello', null);
-    node.setUserData('salutation', 'Mr.', null);
-    var newNode = node.cloneNode(true);
+
     var userDataMonitor = new UserDataMonitor();
+    node.setUserData('greeting', 'Hello', userDataMonitor.handle);
+    node.setUserData('salutation', 'Mr.', userDataMonitor.handle);
+    var newNode = node.cloneNode(true);
     test.equal(userDataMonitor.allNotifications.length, 2, 'twoNotifications');
     userDataMonitor.allNotifications.forEach(function(notification){
       test.equal(notification.operation, 1, 'operationIsClone');
@@ -28342,11 +28345,11 @@ exports.tests = {
     var cs = {greeting: 0, salutation: 0}
     var doc = barfoo.barfoo();
     var node = doc.getElementsByTagName("p").item(0);
-    node.setUserData('greeting', 'Hello', null);
-    node.setUserData('salutation', 'Mr.', null);
     var userDataMonitor = new UserDataMonitor();
+    node.setUserData('greeting', 'Hello', userDataMonitor.handle);
+    node.setUserData('salutation', 'Mr.', userDataMonitor.handle);
     var newNode = doc.importNode(node,true);
-    test.equal(userDataMonitor.allNotifications.length, 1, 'twoNotifications');
+    test.equal(userDataMonitor.allNotifications.length, 2, 'twoNotifications');
     userDataMonitor.allNotifications.forEach(function(notification){
       test.equal(notification.operation, 2, 'operationIsImport');
       test.equal(notification.data, xs[notification.key], 'notification.data should be '+xs[notification.key]);
@@ -28371,10 +28374,10 @@ exports.tests = {
     var cs = {greeting: 0, salutation: 0}
     var doc = barfoo.barfoo();
     var node = doc.getElementsByTagName("p").item(0);
-    node.setUserData('greeting', 'Hello', null);
-    node.setUserData('salutation', 'Mr.', null);
-    var newNode = doc.adoptNode(node);
     var userDataMonitor = new UserDataMonitor();
+    node.setUserData('greeting', 'Hello', userDataMonitor.handle);
+    node.setUserData('salutation', 'Mr.', userDataMonitor.handle);
+    var newNode = doc.adoptNode(node);
     test.equal(userDataMonitor.allNotifications.length, 2, 'twoNotifications');
     userDataMonitor.allNotifications.forEach(function(notification){
       test.equal(notification.operation, 5, 'operationIsAdopt');
