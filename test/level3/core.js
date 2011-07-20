@@ -28286,7 +28286,7 @@ exports.tests = {
     var newNode = doc.renameNode(node, node.namespaceURI, 'div');
     test.equal(udh.notifications.length, 2, 'twoNotifications');
     udh.notifications.forEach(function(notification){
-      test.equal(notification.operation, udh.NODE_RENAME, 'operationIsRename');
+      test.equal(notification.operation, udh.NODE_RENAMED, 'operationIsRename');
       test.equal(notification.data, xs[notification.key], 'notification.data should be '+xs[notification.key]);
       test.equal(notification.src, node, 'srcIsNode')
       if (notification.dst == null) {
