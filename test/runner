@@ -38,6 +38,9 @@ var start = new Date().getTime();
 var fileFilter = [];
 var testFilter = [];
 
+Error.stackTraceLimit = 100;
+
+
 if (argv.suites) {
   fileFilter = argv.suites.replace(/\s/g, '').split(',');
 }
@@ -158,13 +161,20 @@ nodeunit.runModules(modulesToRun, {
             a = nodeunit.utils.betterErrors(a);
             if (a.message) {
                 console.log(
-                    'Assertion Message: ' + assertion_message(a.message)
+                    'Assertion Message: ' + assertion_message(a.message) + '\n' +
+                    'expected:', a.error.expected, 'got:', a.error.actual
                  );
-              }
+            }
+           } else {
+            if (a.error.expected || a.error.actual) {
+              console.log('\nERROR', a.error.expected, 'vs', a.error.actual, '\n');
+            }
+
+            console.log(a.error.message, a.error.stack, (new Error()).stack);
            }
-          console.log(a.error.stack + '\n');
          }
       });
+
       if (argv['fail-fast']) {
         process.exit();
       }
