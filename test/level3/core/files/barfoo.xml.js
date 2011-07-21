@@ -55,7 +55,7 @@ module.exports.barfoo =  function () {
     defaultsAttributes
   );
 
-  doc.doctype = docType;
+  doc.appendChild(docType);
 
   doc.implementation =  new dom.DOMImplementation(doc, {
     "XML" : ["1.0", "2.0"],

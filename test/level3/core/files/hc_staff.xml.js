@@ -53,7 +53,7 @@ exports.hc_staff = function() {
 
   doc._inputEncoding = 'UTF-8';
 
-  doc.doctype = doctype;
+  doc.appendChild(doctype);
   doc.implementation = implementation;
 
   doc.appendChild(doc.createComment(" This is comment number 1."));
