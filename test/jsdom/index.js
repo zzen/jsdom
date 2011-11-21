@@ -56,6 +56,7 @@ exports.tests = {
   },
 
   env_with_absolute_file: function(test) {
+    console.log(path.join(__dirname, '..', '..', 'example', 'jquery', 'jquery.js'));
     jsdom.env({
       html: path.join(__dirname, 'files', 'env.html'),
       scripts: [path.join(__dirname, '..', '..', 'example', 'jquery', 'jquery.js')],

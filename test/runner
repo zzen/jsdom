@@ -81,15 +81,15 @@ var files = [
   "level2/html.js",
   "level2/style.js",
   "level2/extra.js",
-  //"level3/core.js",
+  "level3/core.js",
   //"level3/ls.js",
   "level3/xpath.js",
   "window/index.js",
   "window/script.js",
   "window/frame.js",
 //  "sizzle/index.js",
-  "jsdom/index.js",
-  "jsonp/jsonp.js"
+//  "jsdom/index.js",
+//  "jsonp/jsonp.js"
 ];
 
 if (fileFilter.length > 0) {
