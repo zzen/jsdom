@@ -1,5 +1,6 @@
 var dom = require("../../../../lib/jsdom/level3/core").dom.level3.core;
 var util = require("../../../../lib/jsdom/util");
+
 exports.hc_staff = function() {
 
   var doc = new dom.Document("html");

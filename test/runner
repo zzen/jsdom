@@ -19,7 +19,9 @@ var optimist = require('optimist')
     .alias('t', 'tests')
     .describe('t', 'choose the test cases to run. ie: -t jquery')
     .alias('d', 'debug')
-    .describe('d', 'run in node\'s interactive debugger mode');
+    .describe('d', 'run in node\'s interactive debugger mode')
+    .alias('v', 'verbose')
+    .describe('v', 'show all tests that are being run');
 
 var argv = optimist.argv;
 if (argv.help) {
@@ -79,14 +81,15 @@ var files = [
   "level2/html.js",
   "level2/style.js",
   "level2/extra.js",
-  "level3/core.js",
-  "level3/ls.js",
+  //"level3/core.js",
+  //"level3/ls.js",
   "level3/xpath.js",
-  /*
-   TODO: this needs work, will break everything if included.
-   "window",*/
-   "sizzle/index.js",
-   "jsdom/index.js"
+  "window/index.js",
+  "window/script.js",
+  "window/frame.js",
+//  "sizzle/index.js",
+  "jsdom/index.js",
+  "jsonp/jsonp.js"
 ];
 
 if (fileFilter.length > 0) {
@@ -100,7 +103,6 @@ if (fileFilter.length > 0) {
    return ok;
   });
 }
-
 
 var modules = {};
 var modulesToRun = {};
@@ -140,11 +142,21 @@ nodeunit.runModules(modulesToRun, {
     moduleIndex++;
   },
   moduleDone: function (name, assertions) {
+    if (argv['verbose']) {
+      console.log(' ');
+    }
   },
-  testStart: function () {
+
+  testStart: function (test) {
     modules[currentModule].total++;
+    if (argv['verbose']) {
+      process.stdout.write('  ' + test[0] + ' ...');
+    }
   },
-  testDone: function (name, assertions) {
+  testDone: function (test, assertions) {
+    if (argv['verbose']) {
+      console.log(' done');
+    }
     totalTests++;
     if (!assertions.failures()) {
       passedTests++;
@@ -154,7 +166,7 @@ nodeunit.runModules(modulesToRun, {
       failedTests++;
       modules[currentModule].fail++;
 
-      console.log('✖ ' + currentModule + '/' + name);
+      console.log('✖ ' + currentModule + '/' + test);
       assertions.forEach(function (a) {
         if (a.failed()) {
           if (a.error instanceof AssertionError) {
@@ -172,6 +184,8 @@ nodeunit.runModules(modulesToRun, {
 
             console.log(a.error.message, a.error.stack, (new Error()).stack);
            }
+         } else {
+           console.log(a.message);
          }
       });
 
@@ -257,4 +271,3 @@ nodeunit.runModules(modulesToRun, {
     console.log('TIME: %dms', duration);
   }
 });
-

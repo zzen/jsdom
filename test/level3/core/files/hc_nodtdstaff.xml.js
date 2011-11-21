@@ -1,5 +1,4 @@
-var sys = require("sys"),
-    dom = require("../../../../lib/jsdom/level3/core").dom.level3.core;
+var dom = require("../../../../lib/jsdom/level2/core").dom.level2.core;
 
 /*<html xmlns="http://www.w3.org/1999/xhtml"><head><title>hc_nodtdstaff</title></head><body onload="parent.loadComplete()">
 
