@@ -519,7 +519,7 @@ exports.tests = {
 
   // TODO: look into breaking into a testcase
   queryselectorall: function(test) {
-    var html = '<html><body><div id="main"><p>Foo</p><p>Bar</p><div>Boo</div><div>Far</div></div></body></html>',
+    var html = '<html><body><div id="main"><p>Foo</p><p>Bar</p><div>Boo</div><div>Far</div></div><p>Baz</p></body></html>',
         document = jsdom.jsdom(html, null, {features: {'QuerySelector': true}}),
         div = document.body.children.item(0),
         elements = document.querySelectorAll("#main p");
@@ -543,9 +543,9 @@ exports.tests = {
     topNode.id = "fuz";
     newNode.id = "buz";
     topNode.appendChild(newNode);
-    var elements4 = topNode.querySelectorAll("#fuz #buz");
-    test.equal(elements4.length, 1, 'one result');
-    test.equal(elements4.item(0), newNode, 'newNode and first-p');
+    var elements5 = topNode.querySelectorAll("#fuz #buz");
+    test.equal(elements5.length, 1, 'one result');
+    test.equal(elements5.item(0), newNode, 'newNode and first-p');
     test.done();
   },
 
